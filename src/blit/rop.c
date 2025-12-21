@@ -10,8 +10,13 @@
  */
 #define S fetch()
 
+/*!
+ * \brief Macro to define a raster operation function.
+ * \param revPolish The reverse polish notation name of the raster operation.
+ * \param x The expression defining the raster operation using D and S.
+ */
 #define ROP_REV_POLISH(revPolish, x)                                                                                   \
-  scan_byte rop##revPolish(const scan_byte *store, scan_byte (*fetch)(void)) { return x; }
+  static scan_byte rop##revPolish(const scan_byte *store, scan_byte (*fetch)(void)) { return x; }
 
 /*!
  * \brief Raster operation: 0.
