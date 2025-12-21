@@ -5,6 +5,7 @@ add_library(blit
     # Source files for the blit library.
     ${CMAKE_CURRENT_SOURCE_DIR}/src/blit/rgn1.c
     ${CMAKE_CURRENT_SOURCE_DIR}/src/blit/rop2.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/blit/phase_align.c
 )
 
 # Include directories for the library.
