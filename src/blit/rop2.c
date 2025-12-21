@@ -202,6 +202,22 @@ bool blit_rop2(struct blit_scan *result, struct blit_rgn1 *x, struct blit_rgn1 *
   struct blit_phase_align align;
   blit_phase_align_start(&align, x->origin, x->origin_source & 7, blit_scan_find(source, x->origin_source, y->origin_source));
 
+  /*
+   * Perform the bit block transfer using the specified raster operation. The
+   * transfer is done scanline by scanline, processing each byte in the scanline
+   * according to the raster operation defined by rop2. The function handles the
+   * masking of the first and last bytes in each scanline to ensure that only
+   * the relevant bits are modified. If there are no extra bytes beyond the
+   * first byte, it processes the scanline in a single pass. If there are extra
+   * bytes, it processes the first byte with the origin mask, then processes the
+   * middle bytes without masking, and finally processes the last byte with the
+   * extent mask.
+   *
+   * This approach ensures that the bit block transfer is efficient and
+   * correctly applies the raster operation across the specified region. The use
+   * of the phase alignment structure ensures that the source data is correctly
+   * aligned with the destination data during the transfer.
+   */
   if (extra_scan_count == 0) {
     const blit_scanline_t scan_mask = scan_origin_mask & scan_extent_mask;
     int extent = y->extent;
