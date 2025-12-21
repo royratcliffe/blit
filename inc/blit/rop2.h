@@ -3,6 +3,15 @@
  * SPDX-License-Identifier: MIT
  */
 
+ /*!
+  * \file blit/rop2.h
+  * \brief Binary raster operations.
+  * \details This header file declares the enumeration of binary raster operation
+  * codes used in graphics operations, as well as the function prototype for
+  * performing raster operations on scan structures. These operations combine
+  * source and destination pixel values using bitwise operations.
+  */
+
 #ifndef BLIT_ROP2_H
 #define BLIT_ROP2_H
 

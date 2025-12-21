@@ -3,6 +3,16 @@
  * SPDX-License-Identifier: MIT
  */
 
+ /*!
+  * \file blit/rop2.c
+  * \brief Binary raster operations.
+  * \details This source file implements the functions for performing binary raster
+  * operations on scan structures, as declared in the `blit/rop2.h` header file. These
+  * operations combine source and destination pixel values using bitwise operations.
+  * The implementation includes functions for various raster operations, such as
+  * copy, invert, and, or, xor, and others.
+  */
+
 #include <blit/phase_align.h>
 #include <blit/rop2.h>
 
