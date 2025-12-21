@@ -25,7 +25,6 @@ enum blit_rop2 {
   blit_rop2_SDno,
   blit_rop2_DSo,
   blit_rop2_1,
-  blit_rop2_max,
   blit_rop2_not_source_erase = blit_rop2_DSon,
   blit_rop2_not_source_copy = blit_rop2_Sn,
   blit_rop2_source_erase = blit_rop2_SDna,
