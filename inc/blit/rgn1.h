@@ -61,8 +61,18 @@ static inline bool blit_rgn1_slip(struct blit_rgn1 *rgn1) {
   return true;
 }
 
-static inline bool blit_rgn1_clip(struct blit_rgn1 *rgn1, int extent_source) {
-  int extent = extent_source - rgn1->origin_source;
+/*!
+ * \brief Clip a one-dimensional region to a given extent.
+ * \details This function clips a one-dimensional region represented by the
+ * \c blit_rgn1 structure to a specified extent. If the current extent of the
+ * region exceeds the given extent, it is reduced accordingly. If the given
+ * extent is non-positive, the function returns false.
+ * \param rgn1 Pointer to the \c blit_rgn1 structure to clip.
+ * \param extent The extent to which the region should be clipped.
+ * \return true if the region was successfully clipped; false if the given
+ * extent is non-positive.
+ */
+static inline bool blit_rgn1_clip(struct blit_rgn1 *rgn1, int extent) {
   if (0 >= extent)
     return false;
   if (extent < rgn1->extent)
