@@ -15,7 +15,6 @@
 #define __BLIT_SCAN_H__
 
 #include <stdint.h>
-#include <stddef.h>
 
 /*!
  * \brief Type definition for a scanline element.
@@ -56,8 +55,42 @@ struct blit_scan {
    * buffer. The number must be positive (hence the unsigned size type) and at
    * least \c width bytes.
    */
-  size_t stride;
+  int stride;
 };
+
+/*!
+ * \brief Macro to define a scanline structure with storage.
+ * \details This macro defines a scanline structure along with its associated
+ * storage buffer. The macro takes the name of the scanline structure, its
+ * width, and its height as parameters. It creates a storage array of
+ * `blit_scanline_t` elements and initialises a `blit_scan` structure with the
+ * appropriate values.
+ * \param name The name of the scanline structure.
+ * \param width The width of the scanline buffer in pixels.
+ * \param height The height of the scanline buffer in pixels.
+ * \note The stride is automatically calculated based on the width, ensuring
+ * that it is sufficient to hold the specified number of pixels.
+ */
+#define BLIT_SCAN_DEFINE(name, width, height)                                                                                                                  \
+  blit_scanline_t name##_store[(((width) + 7) >> 3) * (height)];                                                                                               \
+  struct blit_scan name = {name##_store, (width), (height), ((width) + 7) >> 3}
+
+/*!
+ * \brief Macro to define a static scanline structure with storage.
+ * \details This macro defines a static scanline structure along with its
+ * associated storage buffer. The macro takes the name of the scanline structure,
+ * its width, and its height as parameters. It creates a static storage array of
+ * `blit_scanline_t` elements and initialises a static `blit_scan` structure with the
+ * appropriate values.
+ * \param name The name of the static scanline structure.
+ * \param width The width of the scanline buffer in pixels.
+ * \param height The height of the scanline buffer in pixels.
+ * \note The stride is automatically calculated based on the width, ensuring
+ * that it is sufficient to hold the specified number of pixels.
+ */
+#define BLIT_SCAN_DEFINE_STATIC(name, width, height)                                                                                                           \
+  static blit_scanline_t name##_store[(((width) + 7) >> 3) * (height)];                                                                                        \
+  static struct blit_scan name = {name##_store, (width), (height), ((width) + 7) >> 3}
 
 /*!
  * \brief Find the pointer to a specific bit in the scanline buffer.
