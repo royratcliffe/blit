@@ -1,14 +1,14 @@
 #include <blit/scan.h>
 
 /*!
- * \brief 8-bit destination operand.
- */
-#define D (*store)
-
-/*!
  * \brief 8-bit source operand.
  */
 #define S fetch()
+
+/*!
+ * \brief 8-bit destination operand.
+ */
+#define D (*store)
 
 typedef blit_scan_t (*blit_rop_func_t)(blit_scan_t (*fetch)(void), const blit_scan_t *store);
 
