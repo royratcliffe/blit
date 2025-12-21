@@ -25,14 +25,14 @@ enum blit_rop2 {
   blit_rop2_SDno,
   blit_rop2_DSo,
   blit_rop2_1,
-  blit_rop2_not_source_erase = blit_rop2_DSon,
-  blit_rop2_not_source_copy = blit_rop2_Sn,
-  blit_rop2_source_erase = blit_rop2_SDna,
-  blit_rop2_source_invert = blit_rop2_DSx,
-  blit_rop2_source_and = blit_rop2_DSa,
+  blit_rop2_not_erase = blit_rop2_DSon,
+  blit_rop2_not_copy = blit_rop2_Sn,
+  blit_rop2_erase = blit_rop2_SDna,
+  blit_rop2_xor = blit_rop2_DSx,
+  blit_rop2_and = blit_rop2_DSa,
   blit_rop2_merge_paint = blit_rop2_DSno,
-  blit_rop2_source_copy = blit_rop2_S,
-  blit_rop2_source_paint = blit_rop2_DSo,
+  blit_rop2_copy = blit_rop2_S,
+  blit_rop2_paint = blit_rop2_DSo,
   /*
    * Unary raster operations defined in terms of binary operations.
    */
