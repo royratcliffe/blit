@@ -96,12 +96,12 @@ ROP_REV_POLISH(DSx, D ^ S);
 /*!
  * \brief Raster operation: NOT (D AND S).
  */
-ROP_REV_POLISH(DSan, ~(D & S));
+ROP_REV_POLISH(DSan, ~(D &S));
 
 /*!
  * \brief Raster operation: D AND S.
  */
-ROP_REV_POLISH(DSa, D & S);
+ROP_REV_POLISH(DSa, D &S);
 
 /*!
  * \brief Raster operation: NOT (D XOR S).
