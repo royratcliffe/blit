@@ -49,6 +49,20 @@ enum blit_rop2 {
   blit_rop2_whiteness = blit_rop2_1,
 };
 
+/*!
+ * \brief Perform raster operation with masking and store the result.
+ * \details This function performs a raster operation defined by the \c rop2
+ * parameter on a specified region of the source and destination scan
+ * structures. It uses one-dimensional region structures for both the x and y
+ * axes to define the area of operation. The function handles phase alignment of
+ * the source data to ensure correct bit alignment during the operation.
+ * \param result Pointer to the destination scan structure.
+ * \param x Pointer to the one-dimensional region structure for the x-axis.
+ * \param y Pointer to the one-dimensional region structure for the y-axis.
+ * \param source Pointer to the source scan structure.
+ * \param rop2 The raster operation code.
+ * \return true if the operation was successful, false otherwise.
+ */
 bool blit_rop2(struct blit_scan *result, struct blit_rgn1 *x, struct blit_rgn1 *y, const struct blit_scan *source, enum blit_rop2 rop2);
 
 #endif /* BLIT_ROP2_H */
