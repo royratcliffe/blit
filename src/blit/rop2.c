@@ -146,10 +146,10 @@ static blit_rop2_func_t rop2[] = {
 bool blit_rop2(struct blit_scan *result, struct blit_rgn1 *x, struct blit_rgn1 *y, const struct blit_scan *source,
                enum blit_rop2 rop2) {
   blit_rgn1_norm(x);
-  blit_rgn1_norm(y);
   if (!blit_rgn1_slip(x) || !blit_rgn1_clip(x, result->width - x->origin) ||
       !blit_rgn1_clip(x, source->width - x->origin_source))
     return false;
+  blit_rgn1_norm(y);
   if (!blit_rgn1_slip(y) || !blit_rgn1_clip(y, result->height - y->origin) ||
       !blit_rgn1_clip(y, source->height - y->origin_source))
     return false;
