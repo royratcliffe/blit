@@ -15,6 +15,7 @@
 #define __BLIT_SCAN_H__
 
 #include <stdint.h>
+#include <stddef.h>
 
 /*!
  * \brief Type definition for a scanline element.
