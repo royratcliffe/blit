@@ -162,6 +162,19 @@ bool blit_rop2(struct blit_scan *result, struct blit_rgn1 *x, struct blit_rgn1 *
   blit_rgn1_norm(y);
   if (!blit_rgn1_slip(y) || !blit_rgn1_clip(y, result->height - y->origin) || !blit_rgn1_clip(y, source->height - y->origin_source))
     return false;
+
+  /*
+   * Compute some important values up front to avoid doing it inside the bit
+   * block transfer loops. The x_max constant represents the maximum x
+   * coordinate of the region to be processed. The extra_scan_count constant
+   * calculates how many additional bytes (beyond the first byte) are needed to
+   * cover the width of the region in bytes. The scan_origin_mask and
+   * scan_extent_mask constants are used to mask the bits at the start and end
+   * of each scanline, ensuring that only the relevant bits are processed. The
+   * offset and offset_source constants are used to calculate the stride offsets
+   * for the destination and source scanlines, respectively, allowing for
+   * efficient traversal of the scanline buffers.
+   */
   const int x_max = x->origin + x->extent - 1;
   const int extra_scan_count = (x_max >> 3) - (x->origin >> 3);
   const blit_scanline_t scan_origin_mask = 0xffU >> (x->origin & 7);
