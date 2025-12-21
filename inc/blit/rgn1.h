@@ -1,3 +1,6 @@
+#ifndef __BLIT_RGN1_H__
+#define __BLIT_RGN1_H__
+
 #include <assert.h>
 #include <stdbool.h>
 
@@ -66,3 +69,5 @@ static inline bool blit_rgn1_clip(struct blit_rgn1 *rgn1, int extent_source) {
     rgn1->extent = extent;
   return true;
 }
+
+#endif /* __BLIT_RGN1_H__ */
