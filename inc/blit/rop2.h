@@ -1,3 +1,11 @@
+/*
+ * SPDX-FileCopyrightText: 1996, 1998, 1999, 2002, Roy Ratcliffe, Northumberland, United Kingdom
+ * SPDX-License-Identifier: MIT
+ */
+
+#ifndef BLIT_ROP2_H
+#define BLIT_ROP2_H
+
 #include <blit/rgn1.h>
 #include <blit/scan.h>
 
@@ -42,3 +50,5 @@ enum blit_rop2 {
 };
 
 bool blit_rop2(struct blit_scan *result, struct blit_rgn1 *x, struct blit_rgn1 *y, const struct blit_scan *source, enum blit_rop2 rop2);
+
+#endif /* BLIT_ROP2_H */

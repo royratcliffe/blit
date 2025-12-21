@@ -1,3 +1,8 @@
+/*
+ * SPDX-FileCopyrightText: 1996, 1998, 1999, 2002, Roy Ratcliffe, Northumberland, United Kingdom
+ * SPDX-License-Identifier: MIT
+ */
+
 #include <blit/phase_align.h>
 #include <blit/rop2.h>
 
