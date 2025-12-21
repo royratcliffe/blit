@@ -3,10 +3,10 @@
 
 #include <stdint.h>
 
-typedef uint8_t blit_scan_t;
+typedef uint8_t blit_scanline_t;
 
 struct blit_scan {
-  blit_scan_t *store;
+  blit_scanline_t *store;
   int width;
   int height;
   int stride;
