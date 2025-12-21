@@ -1,7 +1,7 @@
 #include <blit/rop2.h>
 
-#include <stdio.h>
 #include <assert.h>
+#include <stdio.h>
 
 int tests_pat() {
   blit_scanline_t vPatBits[] = {
