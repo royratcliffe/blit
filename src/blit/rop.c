@@ -14,6 +14,32 @@ typedef blit_scan_t (*blit_rop_func_t)(blit_scan_t (*fetch)(void), const blit_sc
 
 /*!
  * \brief Macro to define a raster operation function.
+ * \details The macro ROP_REV_POLISH is used to define the raster operation
+ * functions below. Each function takes a fetch function to get the source
+ * operand (S) and a pointer to the destination operand (D). The operations are
+ * defined using standard bitwise operations.
+ *
+ * The defined raster operations include:
+ *
+ * - 0: Always returns 0.
+ * - DSon: NOT (D OR S).
+ * - DSna: D AND NOT S.
+ * - Sn: NOT S.
+ * - SDna: S AND NOT D.
+ * - Dn: NOT D.
+ * - DSx: D XOR S.
+ * - DSan: NOT (D AND S).
+ * - DSa: D AND S.
+ * - DSxn: NOT (D XOR S).
+ * - D: D.
+ * - DSno: D OR NOT S.
+ * - S: S.
+ * - SDno: S OR NOT D.
+ * - DSo: D OR S.
+ * - 1: Always returns 1 (0xffU).
+ *
+ * Each operation is implemented as a static function returning the result of the
+ * specified bitwise expression.
  * \param revPolish The reverse polish notation name of the raster operation.
  * \param x The expression defining the raster operation using D and S.
  */
