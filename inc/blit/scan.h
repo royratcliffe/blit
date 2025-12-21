@@ -5,4 +5,11 @@
 
 typedef uint8_t blit_scan_t;
 
+struct blit_scan {
+  blit_scan_t *store;
+  int width;
+  int height;
+  int stride;
+};
+
 #endif /* __BLIT_SCAN_H__ */
