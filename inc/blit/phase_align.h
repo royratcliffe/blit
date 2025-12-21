@@ -9,10 +9,11 @@
 /*!
  * \file blit/phase_align.h
  * \brief Phase alignment for 8-bit bytes.
- * This header file defines the `phase_align` structure and functions for
- * managing phase alignment of 8-bit bytes. It allows for fetching bytes with a
- * specified shift, which is useful in scenarios where data needs to be aligned
- * or shifted for processing, such as in graphics or display memory management.
+ * \details This header file defines the `phase_align` structure and functions
+ * for managing phase alignment of 8-bit bytes. It allows for fetching bytes
+ * with a specified shift, which is useful in scenarios where data needs to be
+ * aligned or shifted for processing, such as in graphics or display memory
+ * management.
  */
 
 #include <blit/scan.h>

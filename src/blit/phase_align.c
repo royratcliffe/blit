@@ -4,10 +4,10 @@
  */
 
 /*!
- * \file phase_align.c
+ * \file blit/phase_align.c
  * \brief Phase alignment for 8-bit bytes.
- * This source file implements the functions for managing phase alignment of
- * 8-bit bytes, as defined in the `phase_align.h` header file.
+ * \details This source file implements the functions for managing phase
+ * alignment of 8-bit bytes, as defined in the `blit/phase_align.h` header file.
  */
 
 #include <blit/phase_align.h>
