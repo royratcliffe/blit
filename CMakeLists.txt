@@ -21,7 +21,7 @@ target_include_directories(blit
 include(CTest)
 create_test_sourcelist(test_sources
     test_runner.c
-    tests/pat.c
+    test/pat.c
 )
 
 # Add a test executable that links against the library.
@@ -32,4 +32,4 @@ add_executable(test_runner
 )
 target_link_libraries(test_runner PRIVATE blit)
 
-add_test(NAME pat COMMAND test_runner tests/pat)
+add_test(NAME pat COMMAND test_runner test/pat)

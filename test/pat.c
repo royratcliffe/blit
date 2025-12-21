@@ -3,7 +3,7 @@
 #include <assert.h>
 #include <stdio.h>
 
-int tests_pat() {
+int test_pat() {
   blit_scanline_t pat_store[] = {
       0x40U, // #. (black-white)
       0x80U, // .# (white-black)
