@@ -34,7 +34,7 @@ int tests_pat() {
           .extent = imagePat.height,
           .origin_source = 0,
       };
-      blit_rop2(&image, &x_rgn1, &y_rgn1, &imagePat, blit_rop2_source_copy);
+      assert(blit_rop2(&image, &x_rgn1, &y_rgn1, &imagePat, blit_rop2_source_copy));
     }
   }
 
@@ -57,7 +57,7 @@ int tests_pat() {
           .extent = 1,
           .origin_source = y,
       };
-      blit_rop2(&imageBit, &x_rgn1, &y_rgn1, &image, blit_rop2_source_copy);
+      assert(blit_rop2(&imageBit, &x_rgn1, &y_rgn1, &image, blit_rop2_source_copy));
       blit_scanline_t bit = v[0] >> 7;
       (void)printf("%c", bit ? '#' : '.');
       assert(bit == ((x & 1U) ^ (y & 1U)));
