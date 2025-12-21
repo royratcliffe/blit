@@ -9,7 +9,13 @@ struct blit_scan {
   blit_scanline_t *store;
   int width;
   int height;
-  int stride;
+  /*!
+   * \brief Stride of the scanline buffer.
+   * \details The number of bytes between the start of each row in the scanline
+   * buffer. The number must be positive (hence the unsigned size type) and at
+   * least \c width bytes.
+   */
+  size_t stride;
 };
 
 #endif /* __BLIT_SCAN_H__ */
