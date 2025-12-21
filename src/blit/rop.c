@@ -10,13 +10,15 @@
  */
 #define S fetch()
 
+typedef scan_t (*blit_rop_func_t)(scan_t (*fetch)(void), const scan_t *store);
+
 /*!
  * \brief Macro to define a raster operation function.
  * \param revPolish The reverse polish notation name of the raster operation.
  * \param x The expression defining the raster operation using D and S.
  */
 #define ROP_REV_POLISH(revPolish, x)                                                                                   \
-  static scan_byte rop##revPolish(const scan_byte *store, scan_byte (*fetch)(void)) { return x; }
+  static scan_t rop##revPolish(scan_t (*fetch)(void), const scan_t *store) { return x; }
 
 /*!
  * \brief Raster operation: 0.
@@ -98,7 +100,7 @@ ROP_REV_POLISH(DSo, D | S);
  */
 ROP_REV_POLISH(1, 0xffU);
 
-scan_byte (*rop[])(const scan_byte *store, scan_byte (*fetch)(void)) = {
+blit_rop_func_t rop[] = {
     &rop0,   &ropDSon, &ropDSna, &ropSn,   &ropSDna, &ropDn,   &ropDSx, &ropDSan,
     &ropDSa, &ropDSxn, &ropD,    &ropDSno, &ropS,    &ropSDno, &ropDSo, &rop1,
 };
