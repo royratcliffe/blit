@@ -44,7 +44,7 @@ typedef blit_scanline_t (*blit_rop2_func_t)(blit_scanline_t fetch, blit_scanline
  * \param revPolish The reverse polish notation name of the raster operation.
  * \param x The expression defining the raster operation using D and S.
  */
-#define ROP_REV_POLISH(revPolish, x)                                                                                   \
+#define ROP_REV_POLISH(revPolish, x)                                                                                                                           \
   static blit_scanline_t rop##revPolish(blit_scanline_t fetch, blit_scanline_t store) { return x; }
 
 /*!
@@ -140,12 +140,10 @@ ROP_REV_POLISH(1, 0xffU);
  * using bitwise operations on the source (S) and destination (D) operands.
  */
 static blit_rop2_func_t rop2_func[] = {
-    &rop0,   &ropDSon, &ropDSna, &ropSn,   &ropSDna, &ropDn,   &ropDSx, &ropDSan,
-    &ropDSa, &ropDSxn, &ropD,    &ropDSno, &ropS,    &ropSDno, &ropDSo, &rop1,
+    &rop0, &ropDSon, &ropDSna, &ropSn, &ropSDna, &ropDn, &ropDSx, &ropDSan, &ropDSa, &ropDSxn, &ropD, &ropDSno, &ropS, &ropSDno, &ropDSo, &rop1
 };
 
-static void fetch_logic_mask_store(struct blit_phase_align *align, enum blit_rop2 rop2, blit_scanline_t mask,
-                                   blit_scanline_t *store) {
+static void fetch_logic_mask_store(struct blit_phase_align *align, enum blit_rop2 rop2, blit_scanline_t mask, blit_scanline_t *store) {
   *store = (*store & ~mask) | (mask & rop2_func[rop2](blit_phase_align_fetch(align), *store));
 }
 
@@ -153,15 +151,12 @@ static void fetch_logic_store(struct blit_phase_align *align, enum blit_rop2 rop
   *store = rop2_func[rop2](blit_phase_align_fetch(align), *store);
 }
 
-bool blit_rop2(struct blit_scan *result, struct blit_rgn1 *x, struct blit_rgn1 *y, const struct blit_scan *source,
-               enum blit_rop2 rop2) {
+bool blit_rop2(struct blit_scan *result, struct blit_rgn1 *x, struct blit_rgn1 *y, const struct blit_scan *source, enum blit_rop2 rop2) {
   blit_rgn1_norm(x);
-  if (!blit_rgn1_slip(x) || !blit_rgn1_clip(x, result->width - x->origin) ||
-      !blit_rgn1_clip(x, source->width - x->origin_source))
+  if (!blit_rgn1_slip(x) || !blit_rgn1_clip(x, result->width - x->origin) || !blit_rgn1_clip(x, source->width - x->origin_source))
     return false;
   blit_rgn1_norm(y);
-  if (!blit_rgn1_slip(y) || !blit_rgn1_clip(y, result->height - y->origin) ||
-      !blit_rgn1_clip(y, source->height - y->origin_source))
+  if (!blit_rgn1_slip(y) || !blit_rgn1_clip(y, result->height - y->origin) || !blit_rgn1_clip(y, source->height - y->origin_source))
     return false;
   const int x_max = x->origin + x->extent - 1;
   const int extra_scan_count = (x_max >> 3) - (x->origin >> 3);
@@ -171,8 +166,7 @@ bool blit_rop2(struct blit_scan *result, struct blit_rgn1 *x, struct blit_rgn1 *
   const int offset_source = source->stride - 1 - extra_scan_count;
   blit_scanline_t *store = blit_scan_find(result, x->origin, y->origin);
   struct blit_phase_align align;
-  blit_phase_align_start(&align, x->origin, x->origin_source & 7,
-                         blit_scan_find(source, x->origin_source, y->origin_source));
+  blit_phase_align_start(&align, x->origin, x->origin_source & 7, blit_scan_find(source, x->origin_source, y->origin_source));
   if (extra_scan_count == 0) {
     const blit_scanline_t scan_mask = scan_origin_mask & scan_extent_mask;
     int extent = y->extent;

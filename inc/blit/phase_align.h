@@ -102,8 +102,8 @@ static inline uint16_t blit_phase_align_le16(int x_store, const blit_scanline_t 
 static inline uint32_t blit_phase_align_be32(int x_store, const blit_scanline_t *store) {
   struct blit_phase_align align;
   blit_phase_align_start(&align, 0, x_store, store);
-  return (blit_phase_align_fetch(&align) << 24) | (blit_phase_align_fetch(&align) << 16) |
-         (blit_phase_align_fetch(&align) << 8) | blit_phase_align_fetch(&align);
+  return (blit_phase_align_fetch(&align) << 24) | (blit_phase_align_fetch(&align) << 16) | (blit_phase_align_fetch(&align) << 8) |
+         blit_phase_align_fetch(&align);
 }
 
 /*!
@@ -115,8 +115,8 @@ static inline uint32_t blit_phase_align_be32(int x_store, const blit_scanline_t 
 static inline uint32_t blit_phase_align_le32(int x_store, const blit_scanline_t *store) {
   struct blit_phase_align align;
   blit_phase_align_start(&align, 0, x_store, store);
-  return blit_phase_align_fetch(&align) | (blit_phase_align_fetch(&align) << 8) |
-         (blit_phase_align_fetch(&align) << 16) | (blit_phase_align_fetch(&align) << 24);
+  return blit_phase_align_fetch(&align) | (blit_phase_align_fetch(&align) << 8) | (blit_phase_align_fetch(&align) << 16) |
+         (blit_phase_align_fetch(&align) << 24);
 }
 
 #endif /* BLIT_PHASE_ALIGN_H */

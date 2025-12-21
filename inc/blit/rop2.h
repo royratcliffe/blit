@@ -41,5 +41,4 @@ enum blit_rop2 {
   blit_rop2_whiteness = blit_rop2_1,
 };
 
-bool blit_rop2(struct blit_scan *result, struct blit_rgn1 *x, struct blit_rgn1 *y, const struct blit_scan *source,
-               enum blit_rop2 rop2);
+bool blit_rop2(struct blit_scan *result, struct blit_rgn1 *x, struct blit_rgn1 *y, const struct blit_scan *source, enum blit_rop2 rop2);

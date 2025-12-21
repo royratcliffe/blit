@@ -18,8 +18,6 @@ struct blit_scan {
   size_t stride;
 };
 
-static inline blit_scanline_t *blit_scan_find(const struct blit_scan *scan, int x, int y) {
-  return scan->store + scan->stride * y + (x >> 3);
-}
+static inline blit_scanline_t *blit_scan_find(const struct blit_scan *scan, int x, int y) { return scan->store + scan->stride * y + (x >> 3); }
 
 #endif /* __BLIT_SCAN_H__ */
