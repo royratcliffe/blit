@@ -26,6 +26,13 @@
  */
 #define D (store)
 
+/*!
+ * \brief Type definition for raster operation function pointer.
+ * \details This type defines a function pointer for raster operation functions.
+ * Each raster operation function takes two 8-bit operands: the source operand
+ * (`fetch`) and the destination operand (`store`). The function returns an
+ * 8-bit result of the raster operation.
+ */
 typedef blit_scanline_t (*blit_rop2_func_t)(blit_scanline_t fetch, blit_scanline_t store);
 
 /*!
