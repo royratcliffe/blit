@@ -3,8 +3,8 @@
  * SPDX-License-Identifier: MIT
  */
 
-#ifndef BLIT_PHASE_ALIGN_H
-#define BLIT_PHASE_ALIGN_H
+#ifndef __BLIT_PHASE_ALIGN_H__
+#define __BLIT_PHASE_ALIGN_H__
 
 /*!
  * \file blit/phase_align.h
@@ -120,4 +120,4 @@ static inline uint32_t blit_phase_align_le32(int x_store, const blit_scanline_t 
          (blit_phase_align_fetch(&align) << 24);
 }
 
-#endif /* BLIT_PHASE_ALIGN_H */
+#endif /* __BLIT_PHASE_ALIGN_H__ */

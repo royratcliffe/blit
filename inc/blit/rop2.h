@@ -12,8 +12,8 @@
   * source and destination pixel values using bitwise operations.
   */
 
-#ifndef BLIT_ROP2_H
-#define BLIT_ROP2_H
+#ifndef __BLIT_ROP2_H__
+#define __BLIT_ROP2_H__
 
 #include <blit/rgn1.h>
 #include <blit/scan.h>
@@ -74,4 +74,4 @@ enum blit_rop2 {
  */
 bool blit_rop2(struct blit_scan *result, struct blit_rgn1 *x, struct blit_rgn1 *y, const struct blit_scan *source, enum blit_rop2 rop2);
 
-#endif /* BLIT_ROP2_H */
+#endif /* __BLIT_ROP2_H__ */
