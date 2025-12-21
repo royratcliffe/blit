@@ -19,7 +19,7 @@ target_include_directories(blit
 # The test sources will be compiled into a test executable.
 include(CTest)
 create_test_sourcelist(test_sources
-    test_runner.c
+    test_driver.c
     test/pat.c
 )
 
