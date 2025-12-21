@@ -14,13 +14,7 @@ int test_pat() {
       .height = 2,
       .stride = 1,
   };
-  blit_scanline_t image_store[8];
-  struct blit_scan image = {
-      .store = image_store,
-      .width = 8,
-      .height = 8,
-      .stride = 1,
-  };
+  BLIT_SCAN_DEFINE(image, 8, 8);
 
   for (int y = 0; y < image.height; y += pat.height) {
     for (int x = 0; x < image.width; x += pat.width) {
@@ -40,13 +34,7 @@ int test_pat() {
 
   for (int x = 0; x < image.width; ++x) {
     for (int y = 0; y < image.height; ++y) {
-      blit_scanline_t bit_store[] = {0x00U};
-      struct blit_scan bit = {
-          .store = bit_store,
-          .width = 1,
-          .height = 1,
-          .stride = 1,
-      };
+      BLIT_SCAN_DEFINE(bit, 1, 1);
       struct blit_rgn1 x_rgn1 = {
           .origin = 0,
           .extent = 1,
