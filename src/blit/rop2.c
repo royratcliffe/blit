@@ -144,9 +144,8 @@ ROP_REV_POLISH(1, 0xffU);
  * functions. Each function implements a specific raster operation defined
  * using bitwise operations on the source (S) and destination (D) operands.
  */
-static blit_rop2_func_t rop2_func[] = {
-    &rop0, &ropDSon, &ropDSna, &ropSn, &ropSDna, &ropDn, &ropDSx, &ropDSan, &ropDSa, &ropDSxn, &ropD, &ropDSno, &ropS, &ropSDno, &ropDSo, &rop1
-};
+static blit_rop2_func_t rop2_func[] = {&rop0,   &ropDSon, &ropDSna, &ropSn,   &ropSDna, &ropDn,   &ropDSx, &ropDSan,
+                                       &ropDSa, &ropDSxn, &ropD,    &ropDSno, &ropS,    &ropSDno, &ropDSo, &rop1};
 
 static void fetch_logic_mask_store(struct blit_phase_align *align, enum blit_rop2 rop2, blit_scanline_t mask, blit_scanline_t *store) {
   *store = (*store & ~mask) | (mask & rop2_func[rop2](blit_phase_align_fetch(align), *store));
