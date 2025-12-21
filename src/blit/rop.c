@@ -50,6 +50,12 @@ typedef blit_scan_t (*blit_rop_func_t)(blit_scan_t (*fetch)(void), const blit_sc
  * \brief Raster operation: 0.
  */
 ROP_REV_POLISH(0, 0x00U);
+/*
+ * Note that the macro ends with a semicolon. This is intentional to allow for
+ * better formatting, even though semantically it is not required. Without the
+ * trailing semicolon, the code would compile correctly, but automated
+ * formatting tools will indent the subsequent code incorrectly.
+ */
 
 /*!
  * \brief Raster operation: NOT (D OR S).
