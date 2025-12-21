@@ -10,7 +10,7 @@
  */
 #define S fetch()
 
-typedef scan_t (*blit_rop_func_t)(scan_t (*fetch)(void), const scan_t *store);
+typedef blit_scan_t (*blit_rop_func_t)(blit_scan_t (*fetch)(void), const blit_scan_t *store);
 
 /*!
  * \brief Macro to define a raster operation function.
@@ -18,7 +18,7 @@ typedef scan_t (*blit_rop_func_t)(scan_t (*fetch)(void), const scan_t *store);
  * \param x The expression defining the raster operation using D and S.
  */
 #define ROP_REV_POLISH(revPolish, x)                                                                                   \
-  static scan_t rop##revPolish(scan_t (*fetch)(void), const scan_t *store) { return x; }
+  static blit_scan_t rop##revPolish(blit_scan_t (*fetch)(void), const blit_scan_t *store) { return x; }
 
 /*!
  * \brief Raster operation: 0.

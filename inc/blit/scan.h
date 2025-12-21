@@ -3,6 +3,6 @@
 
 #include <stdint.h>
 
-typedef uint8_t scan_byte;
+typedef uint8_t blit_scan_t;
 
 #endif /* __BLIT_SCAN_H__ */
