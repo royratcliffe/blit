@@ -37,7 +37,7 @@ static inline void blit_rgn1_norm(struct blit_rgn1 *rgn1) {
   /*
    * Normalise the extents. Extents are normally positive. A negative extent
    * means the destination and source origins specify the far edge of the
-   * rectangle.  Two's-complement negative extents and put the origins at the
+   * rectangle. Two's-complement negative extents and put the origins at the
    * rectangle's origins.
    */
   if (rgn1->extent < 0) {
