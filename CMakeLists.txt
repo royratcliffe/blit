@@ -3,6 +3,7 @@ project(blit)
 
 add_library(blit
     # Source files for the blit library.
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/blit/rgn1.c
     ${CMAKE_CURRENT_SOURCE_DIR}/src/blit/rop.c
 )
 
