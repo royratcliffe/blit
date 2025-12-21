@@ -1,4 +1,4 @@
-#include <blit/scan.h>
+#include <blit/rop2.h>
 
 /*!
  * \brief 8-bit source operand.
@@ -10,7 +10,7 @@
  */
 #define D (*store)
 
-typedef blit_scan_t (*blit_rop_func_t)(blit_scan_t (*fetch)(void), const blit_scan_t *store);
+typedef blit_scan_t (*blit_rop2_func_t)(blit_scan_t (*fetch)(void), const blit_scan_t *store);
 
 /*!
  * \brief Macro to define a raster operation function.
@@ -132,7 +132,26 @@ ROP_REV_POLISH(DSo, D | S);
  */
 ROP_REV_POLISH(1, 0xffU);
 
-blit_rop_func_t rop[] = {
+/*!
+ * \brief Array of raster operation functions.
+ * \details This array maps raster operation codes to their corresponding
+ * functions. Each function implements a specific raster operation defined
+ * using bitwise operations on the source (S) and destination (D) operands.
+ */
+static blit_rop2_func_t rop2[] = {
     &rop0,   &ropDSon, &ropDSna, &ropSn,   &ropSDna, &ropDn,   &ropDSx, &ropDSan,
     &ropDSa, &ropDSxn, &ropD,    &ropDSno, &ropS,    &ropSDno, &ropDSo, &rop1,
 };
+
+bool blit_rop2(struct blit_scan *result, struct blit_rgn1 *x, struct blit_rgn1 *y, const struct blit_scan *source,
+               enum blit_rop2 rop2) {
+  blit_rgn1_norm(x);
+  blit_rgn1_norm(y);
+  if (!blit_rgn1_slip(x) || !blit_rgn1_clip(x, result->width - x->origin) ||
+      !blit_rgn1_clip(x, source->width - x->origin_source))
+    return false;
+  if (!blit_rgn1_slip(y) || !blit_rgn1_clip(y, result->height - y->origin) ||
+      !blit_rgn1_clip(y, source->height - y->origin_source))
+    return false;
+  return true;
+}
