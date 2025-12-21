@@ -147,10 +147,23 @@ ROP_REV_POLISH(1, 0xffU);
 static blit_rop2_func_t rop2_func[] = {&rop0,   &ropDSon, &ropDSna, &ropSn,   &ropSDna, &ropDn,   &ropDSx, &ropDSan,
                                        &ropDSa, &ropDSxn, &ropD,    &ropDSno, &ropS,    &ropSDno, &ropDSo, &rop1};
 
+/*!
+ * \brief Perform raster operation with masking and store the result.
+ * \param align Pointer to the phase alignment structure.
+ * \param rop2 The raster operation code.
+ * \param mask The mask to apply to the operation.
+ * \param store Pointer to the destination operand.
+ */
 static void fetch_logic_mask_store(struct blit_phase_align *align, enum blit_rop2 rop2, blit_scanline_t mask, blit_scanline_t *store) {
   *store = (*store & ~mask) | (mask & rop2_func[rop2](blit_phase_align_fetch(align), *store));
 }
 
+/*!
+ * \brief Perform raster operation and store the result.
+ * \param align Pointer to the phase alignment structure.
+ * \param rop2 The raster operation code.
+ * \param store Pointer to the destination operand.
+ */
 static void fetch_logic_store(struct blit_phase_align *align, enum blit_rop2 rop2, blit_scanline_t *store) {
   *store = rop2_func[rop2](blit_phase_align_fetch(align), *store);
 }
