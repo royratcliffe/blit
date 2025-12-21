@@ -73,6 +73,7 @@ typedef blit_scanline_t (*blit_rop2_func_t)(blit_scanline_t fetch, blit_scanline
  * \brief Raster operation: 0.
  */
 ROP_REV_POLISH(0, 0x00U);
+
 /*
  * Note that the macro ends with a semicolon. This is intentional to allow for
  * better formatting, even though semantically it is not required. Without the
