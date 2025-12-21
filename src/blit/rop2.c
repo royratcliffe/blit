@@ -169,8 +169,26 @@ bool blit_rop2(struct blit_scan *result, struct blit_rgn1 *x, struct blit_rgn1 *
   const int offset = result->stride - 1 - extra_scan_count;
   const int offset_source = source->stride - 1 - extra_scan_count;
   blit_scanline_t *store = blit_scan_find(result, x->origin, y->origin);
+
+  /*
+   * Set up phase alignment for source fetches. The source x position is given
+   * by x->origin_source. The destination x position is given by x->origin. The
+   * shift is the difference between these two positions modulo 8. The phase
+   * alignment structure handles the bit shifts required to align the source
+   * data with the destination data based on the bit positions. Each fetch from
+   * the phase alignment structure returns a byte (8 bits) aligned according to
+   * the specified bit positions.
+   *
+   * The & 7 operation here ensures that we are working within the bounds of a
+   * byte (0-7 bits). This is important because the phase alignment also
+   * corrects for source byte offsets, ensuring that the fetched data is
+   * correctly aligned with respect to the destination, regardless of the
+   * starting bit positions. Do not let the phase alignment and the scan find
+   * get out of sync! Keep them in step!
+   */
   struct blit_phase_align align;
   blit_phase_align_start(&align, x->origin, x->origin_source & 7, blit_scan_find(source, x->origin_source, y->origin_source));
+
   if (extra_scan_count == 0) {
     const blit_scanline_t scan_mask = scan_origin_mask & scan_extent_mask;
     int extent = y->extent;
