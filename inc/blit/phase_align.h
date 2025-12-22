@@ -1,5 +1,5 @@
 /*
- * SPDX-FileCopyrightText: 1996, 1998, 1999, 2002, Roy Ratcliffe, Northumberland, United Kingdom
+ * SPDX-FileCopyrightText: 2025, Roy Ratcliffe, Northumberland, United Kingdom
  * SPDX-License-Identifier: MIT
  */
 
@@ -20,9 +20,9 @@
 
 /*!
  * \brief Phase alignment structure.
- * This structure is used to manage phase alignment for 8-bit bytes. It contains
- * a function pointer for fetching bytes, a pointer to the store, a carry value,
- * and a shift count.
+ * \details This structure is used to manage phase alignment for 8-bit bytes. It
+ * contains a function pointer for fetching bytes, a pointer to the store, a
+ * carry value, and a shift count.
  *
  * The `fetch` function pointer is used to retrieve the next byte in the
  * phase-aligned stream, either by left shifting, right shifting, or no
@@ -31,23 +31,46 @@
  * value is used to hold any overflow from the previous byte fetch.
  */
 struct blit_phase_align {
-  void (*prefetch)(struct blit_phase_align *align);         /*!< Pre-fetch the next byte */
-  blit_scanline_t (*fetch)(struct blit_phase_align *align); /*!< Fetch the next byte */
-  const blit_scanline_t *store;                             /*!< Pointer to the data being processed */
-  int shift;                                                /*!< Number of bits to shift the data */
-  blit_scanline_t carry;                                    /*!< Overflow from the previous byte fetch */
+  /*!
+   * \brief Prefetch the next byte into the alignment structure.
+   */
+  void (*prefetch)(struct blit_phase_align *align);
+  /*!
+   * \brief Fetch the next byte with appropriate shifting.
+   */
+  blit_scanline_t (*fetch)(struct blit_phase_align *align);
+  /*!
+   * \brief Pointer to the data being processed.
+   */
+  const blit_scanline_t *store;
+  /*!
+   * \brief Number of bits to shift the data.
+   */
+  int shift;
+  /*!
+   * \brief Overflow from the previous byte fetch.
+   */
+  blit_scanline_t carry;
 };
 
 /*!
  * \brief Initialises the phase alignment structure.
- * This function sets up the phase alignment structure with the given parameters.
+ * \details This function sets up the phase alignment structure with the given
+ * parameters.
  * \param align Pointer to the phase alignment structure.
  * \param x The destination bit position.
  * \param x_store The source bit position.
  * \param store Pointer to the data buffer.
  */
-void blit_phase_align_start(struct blit_phase_align *align, int x, int x_store, const blit_scanline_t *store);
+void blit_phase_align_start(struct blit_phase_align *align, int x, int x_store,
+                            const blit_scanline_t *store);
 
+/*!
+ * \brief Prefetches the next byte into the alignment structure.
+ * \details This function prepares the phase alignment structure for the next
+ * byte fetch.
+ * \param align Pointer to the phase alignment structure.
+ */
 void blit_phase_align_prefetch(struct blit_phase_align *align);
 
 /*!
@@ -64,7 +87,8 @@ blit_scanline_t blit_phase_align_fetch(struct blit_phase_align *align);
  * \param store Pointer to the data buffer.
  * \return The fetched byte.
  */
-static inline uint8_t blit_phase_align_byte(int x_store, const blit_scanline_t *store) {
+static inline uint8_t blit_phase_align_byte(int x_store,
+                                            const blit_scanline_t *store) {
   struct blit_phase_align align;
   blit_phase_align_start(&align, 0, x_store, store);
   return blit_phase_align_fetch(&align);
@@ -76,7 +100,8 @@ static inline uint8_t blit_phase_align_byte(int x_store, const blit_scanline_t *
  * \param store Pointer to the data buffer.
  * \return The fetched 16-bit value.
  */
-static inline uint16_t blit_phase_align_be16(int x_store, const blit_scanline_t *store) {
+static inline uint16_t blit_phase_align_be16(int x_store,
+                                             const blit_scanline_t *store) {
   struct blit_phase_align align;
   blit_phase_align_start(&align, 0, x_store, store);
   return (blit_phase_align_fetch(&align) << 8) | blit_phase_align_fetch(&align);
@@ -88,7 +113,8 @@ static inline uint16_t blit_phase_align_be16(int x_store, const blit_scanline_t 
  * \param store Pointer to the data buffer.
  * \return The fetched 16-bit value.
  */
-static inline uint16_t blit_phase_align_le16(int x_store, const blit_scanline_t *store) {
+static inline uint16_t blit_phase_align_le16(int x_store,
+                                             const blit_scanline_t *store) {
   struct blit_phase_align align;
   blit_phase_align_start(&align, 0, x_store, store);
   return blit_phase_align_fetch(&align) | (blit_phase_align_fetch(&align) << 8);
@@ -100,11 +126,13 @@ static inline uint16_t blit_phase_align_le16(int x_store, const blit_scanline_t 
  * \param store Pointer to the data buffer.
  * \return The fetched 32-bit value.
  */
-static inline uint32_t blit_phase_align_be32(int x_store, const blit_scanline_t *store) {
+static inline uint32_t blit_phase_align_be32(int x_store,
+                                             const blit_scanline_t *store) {
   struct blit_phase_align align;
   blit_phase_align_start(&align, 0, x_store, store);
-  return (blit_phase_align_fetch(&align) << 24) | (blit_phase_align_fetch(&align) << 16) | (blit_phase_align_fetch(&align) << 8) |
-         blit_phase_align_fetch(&align);
+  return (blit_phase_align_fetch(&align) << 24) |
+         (blit_phase_align_fetch(&align) << 16) |
+         (blit_phase_align_fetch(&align) << 8) | blit_phase_align_fetch(&align);
 }
 
 /*!
@@ -113,10 +141,13 @@ static inline uint32_t blit_phase_align_be32(int x_store, const blit_scanline_t 
  * \param store Pointer to the data buffer.
  * \return The fetched 32-bit value.
  */
-static inline uint32_t blit_phase_align_le32(int x_store, const blit_scanline_t *store) {
+static inline uint32_t blit_phase_align_le32(int x_store,
+                                             const blit_scanline_t *store) {
   struct blit_phase_align align;
   blit_phase_align_start(&align, 0, x_store, store);
-  return blit_phase_align_fetch(&align) | (blit_phase_align_fetch(&align) << 8) | (blit_phase_align_fetch(&align) << 16) |
+  return blit_phase_align_fetch(&align) |
+         (blit_phase_align_fetch(&align) << 8) |
+         (blit_phase_align_fetch(&align) << 16) |
          (blit_phase_align_fetch(&align) << 24);
 }
 
