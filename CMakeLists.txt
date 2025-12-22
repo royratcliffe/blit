@@ -21,6 +21,7 @@ include(CTest)
 create_test_sourcelist(test_sources
     test_driver.c
     test/pat.c
+    test/left_shift_edge.c
 )
 
 # Add a test executable that links against the library.
@@ -32,3 +33,4 @@ add_executable(test_runner
 target_link_libraries(test_runner PRIVATE blit)
 
 add_test(NAME pat COMMAND test_runner test/pat)
+add_test(NAME left_shift_edge COMMAND test_runner test/left_shift_edge)
