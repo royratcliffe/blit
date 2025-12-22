@@ -30,7 +30,7 @@ int test_left_shift_edge() {
      */
     for (int y = 0; y < result.height; y++) {
       static const blit_scanline_t expected[] = {0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x01U};
-      assert(memcmp(expected, &result.store[y * result.stride], sizeof(expected)) == 0);
+      assert(memcmp(expected, blit_scan_find(&result, 0, y), sizeof(expected)) == 0);
     }
   }
 
