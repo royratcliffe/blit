@@ -183,7 +183,7 @@ static void fetch_logic_mask_store(struct blit_phase_align *align, enum blit_rop
  */
 static void fetch_logic_store(struct blit_phase_align *align, enum blit_rop2 rop2, blit_scanline_t *store);
 
-bool blit_rop2(struct blit_scan *result, struct blit_rgn1 *x, struct blit_rgn1 *y, const struct blit_scan *source, enum blit_rop2 rop2) {
+bool blit_rgn1_rop2(struct blit_scan *result, struct blit_rgn1 *x, struct blit_rgn1 *y, const struct blit_scan *source, enum blit_rop2 rop2) {
   /*
    * Normalise, slip, and clip the x region. The regions are first normalised to
    * ensure that their extents are non-negative. Then, they are slipped to
@@ -281,6 +281,27 @@ bool blit_rop2(struct blit_scan *result, struct blit_rgn1 *x, struct blit_rgn1 *
     }
   }
   return true;
+}
+
+bool blit_rop2(struct blit_scan *result, int x, int y, int x_extent, int y_extent, const struct blit_scan *source, int x_source, int y_source,
+               enum blit_rop2 rop2) {
+  /*
+   * Build the one-dimensional region structures for x and y axes from the
+   * arguments. These structures define the origin and extent of the region to
+   * be processed in both the result and source scan structures. Throw them
+   * away after the raster operation because the caller does not want them.
+   */
+  struct blit_rgn1 x_rgn1 = {
+      .origin = x,
+      .extent = x_extent,
+      .origin_source = x_source,
+  };
+  struct blit_rgn1 y_rgn1 = {
+      .origin = y,
+      .extent = y_extent,
+      .origin_source = y_source,
+  };
+  return blit_rgn1_rop2(result, &x_rgn1, &y_rgn1, source, rop2);
 }
 
 void fetch_logic_mask_store(struct blit_phase_align *align, enum blit_rop2 rop2, blit_scanline_t mask, blit_scanline_t *store) {

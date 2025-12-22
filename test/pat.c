@@ -2,6 +2,7 @@
 
 #include <assert.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 int test_pat() {
   blit_scanline_t pat_store[] = {
@@ -28,7 +29,7 @@ int test_pat() {
           .extent = pat.height,
           .origin_source = 0,
       };
-      assert(blit_rop2(&image, &x_rgn1, &y_rgn1, &pat, blit_rop2_copy));
+      assert(blit_rgn1_rop2(&image, &x_rgn1, &y_rgn1, &pat, blit_rop2_copy));
     }
   }
 
@@ -45,12 +46,13 @@ int test_pat() {
           .extent = 1,
           .origin_source = y,
       };
-      assert(blit_rop2(&bit, &x_rgn1, &y_rgn1, &image, blit_rop2_copy));
+      assert(blit_rgn1_rop2(&bit, &x_rgn1, &y_rgn1, &image, blit_rop2_copy));
       blit_scanline_t bit_scanline = bit_store[0] >> 7;
       (void)printf("%c", bit_scanline ? '#' : '.');
       assert(bit_scanline == ((x & 1U) ^ (y & 1U)));
     }
     (void)printf("\n");
   }
-  return 0;
+
+  return EXIT_SUCCESS;
 }
