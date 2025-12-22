@@ -12,6 +12,11 @@
 
 #include <blit/phase_align.h>
 
+/*
+ * The pre-fetch functions prepare the phase alignment structure for the next byte
+ * fetch. The fetch functions retrieve the next byte from the phase alignment
+ * structure, applying the appropriate shift based on the alignment.
+ */
 static void prefetch(struct blit_phase_align *align);
 static void prefetch_left_shift(struct blit_phase_align *align);
 
