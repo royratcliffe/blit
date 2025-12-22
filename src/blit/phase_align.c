@@ -41,7 +41,8 @@ static blit_scanline_t fetch_right_shift(struct blit_phase_align *align);
  * stream appears as a sequence of bytes returned by the phase_align_fetch
  * function, where each byte is shifted according to the specified shift value.
  */
-void blit_phase_align_start(struct blit_phase_align *align, int x, int x_store, const blit_scanline_t *store) {
+void blit_phase_align_start(struct blit_phase_align *align, int x, int x_store,
+                            const blit_scanline_t *store) {
   align->store = store + (x_store >> 3);
   int shift = (x & 7) - (x_store & 7);
   if (shift < 0) {
@@ -71,23 +72,30 @@ void blit_phase_align_start(struct blit_phase_align *align, int x, int x_store, 
   }
 }
 
-void blit_phase_align_prefetch(struct blit_phase_align *align) { (*align->prefetch)(align); }
+void blit_phase_align_prefetch(struct blit_phase_align *align) {
+  (*align->prefetch)(align);
+}
 
-blit_scanline_t blit_phase_align_fetch(struct blit_phase_align *align) { return (*align->fetch)(align); }
+blit_scanline_t blit_phase_align_fetch(struct blit_phase_align *align) {
+  return (*align->fetch)(align);
+}
 
 static void prefetch(struct blit_phase_align *align) { (void)align; }
 
-static void prefetch_left_shift(struct blit_phase_align *align) { align->carry = *align->store; }
+static void prefetch_left_shift(struct blit_phase_align *align) {
+  align->carry = *align->store;
+}
 
 /*!
- * \brief Fetches a 8-bit byte from the phase alignment structure with a left shift.
+ * \brief Fetches a 8-bit byte from the phase alignment structure with a left
+ * shift.
  * \param align Pointer to the phase alignment structure.
  * \return The fetched 8-bit byte.
  */
 static blit_scanline_t fetch_left_shift(struct blit_phase_align *align) {
   const blit_scanline_t lo = *++align->store; /* pre-increment */
   const blit_scanline_t hi = align->carry;    /* carry is the previous value */
-  align->carry = lo;                          /* store the current value as carry for the next call */
+  align->carry = lo; /* store the current value as carry for the next call */
   return (hi << align->shift) | (lo >> (8 - align->shift));
 }
 
@@ -96,16 +104,19 @@ static blit_scanline_t fetch_left_shift(struct blit_phase_align *align) {
  * \param align Pointer to the phase alignment structure.
  * \return The fetched 8-bit byte.
  */
-static blit_scanline_t fetch(struct blit_phase_align *align) { return *align->store++; }
+static blit_scanline_t fetch(struct blit_phase_align *align) {
+  return *align->store++;
+}
 
 /*!
- * \brief Fetches a 8-bit byte from the phase alignment structure with a right shift.
+ * \brief Fetches a 8-bit byte from the phase alignment structure with a right
+ * shift.
  * \param align Pointer to the phase alignment structure.
  * \return The fetched 8-bit byte.
  */
 static blit_scanline_t fetch_right_shift(struct blit_phase_align *align) {
   const uint8_t lo = *align->store++; /* post-increment */
   const uint8_t hi = align->carry;    /* carry is the previous value */
-  align->carry = lo;                  /* store the current value as carry for the next call */
+  align->carry = lo; /* store the current value as carry for the next call */
   return (hi << (8 - align->shift)) | (lo >> align->shift);
 }
