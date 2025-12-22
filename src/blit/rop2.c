@@ -272,9 +272,9 @@ bool blit_rgn1_rop2(struct blit_scan *result, struct blit_rgn1 *x,
    * of the phase alignment structure ensures that the source data is correctly
    * aligned with the destination data during the transfer.
    */
+  int extent = y->extent;
   if (extra_scan_count == 0) {
     const blit_scanline_t scan_mask = scan_origin_mask & scan_extent_mask;
-    int extent = y->extent;
     while (extent--) {
       blit_phase_align_prefetch(&align);
       fetch_logic_mask_store(&align, rop2, scan_mask, store++);
@@ -282,12 +282,11 @@ bool blit_rgn1_rop2(struct blit_scan *result, struct blit_rgn1 *x,
       align.store += offset_source;
     }
   } else {
-    int extent = y->extent;
     while (extent--) {
       blit_phase_align_prefetch(&align);
       fetch_logic_mask_store(&align, rop2, scan_origin_mask, store++);
-      int count = extra_scan_count;
-      while (--count) {
+      int extra = extra_scan_count;
+      while (--extra) {
         fetch_logic_store(&align, rop2, store++);
       }
       fetch_logic_mask_store(&align, rop2, scan_extent_mask, store++);
