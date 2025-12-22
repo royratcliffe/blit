@@ -48,6 +48,12 @@ struct blit_phase_align {
  */
 void blit_phase_align_start(struct blit_phase_align *align, int x, int x_store, const blit_scanline_t *store);
 
+/*!
+ * \brief Prefetches the next byte into the alignment structure.
+ * \details This function prepares the phase alignment structure for the next
+ * byte fetch.
+ * \param align Pointer to the phase alignment structure.
+ */
 void blit_phase_align_prefetch(struct blit_phase_align *align);
 
 /*!
