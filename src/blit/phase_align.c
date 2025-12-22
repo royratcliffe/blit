@@ -2,7 +2,6 @@
  * SPDX-FileCopyrightText: 2025, Roy Ratcliffe, Northumberland, United Kingdom
  * SPDX-License-Identifier: MIT
  */
-
 /*!
  * \file blit/phase_align.c
  * \brief Phase alignment for 8-bit bytes.

@@ -2,10 +2,6 @@
  * SPDX-FileCopyrightText: 2025, Roy Ratcliffe, Northumberland, United Kingdom
  * SPDX-License-Identifier: MIT
  */
-
-#ifndef __BLIT_PHASE_ALIGN_H__
-#define __BLIT_PHASE_ALIGN_H__
-
 /*!
  * \file blit/phase_align.h
  * \brief Phase alignment for 8-bit bytes.
@@ -15,6 +11,9 @@
  * aligned or shifted for processing, such as in graphics or display memory
  * management.
  */
+
+#ifndef __BLIT_PHASE_ALIGN_H__
+#define __BLIT_PHASE_ALIGN_H__
 
 #include <blit/scan.h>
 

@@ -1,4 +1,17 @@
-#ifndef __BLIT_RGN1_H__
+/*
+ * SPDX-FileCopyrightText: 2025, Roy Ratcliffe, Northumberland, United Kingdom
+ * SPDX-License-Identifier: MIT
+ */
+/*!
+ * \file blit/rgn1.h
+ * \brief One-dimensional region structure.
+ * \details This header file defines the \c blit_rgn1 structure, which
+ * represents a one-dimensional region with an origin, extent, and source
+ * origin. It also provides inline functions for normalising, slipping, and
+ * clipping the region.
+ */
+
+ #ifndef __BLIT_RGN1_H__
 #define __BLIT_RGN1_H__
 
 #include <assert.h>
