@@ -98,7 +98,7 @@ bool blit_rgn1_rop2(struct blit_scan *result, struct blit_rgn1 *x, struct blit_r
  * \param y_source The y-coordinate of the origin of the region in the source.
  * \param rop2 The raster operation code to apply.
  */
-bool blit_rop2(struct blit_scan *result, int x, int y, int x_extent, int y_extent, const struct blit_scan *source, int x_source, int y_source,
-               enum blit_rop2 rop2);
+bool blit_rop2(struct blit_scan *result, const int x, const int y, const int x_extent, const int y_extent, const struct blit_scan *source, const int x_source,
+               const int y_source, enum blit_rop2 rop2);
 
 #endif /* __BLIT_ROP2_H__ */
