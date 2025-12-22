@@ -2,7 +2,6 @@
  * SPDX-FileCopyrightText: 2025, Roy Ratcliffe, Northumberland, United Kingdom
  * SPDX-License-Identifier: MIT
  */
-
 /*!
  * \file blit/rop2.c
  * \brief Binary raster operations.

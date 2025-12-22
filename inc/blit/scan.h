@@ -2,7 +2,6 @@
  * SPDX-FileCopyrightText: 1996, 1998, 1999, 2002, Roy Ratcliffe, Northumberland, United Kingdom
  * SPDX-License-Identifier: MIT
  */
-
 /*!
  * \file blit/scan.h
  * \brief Scanline structure definition.
