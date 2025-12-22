@@ -19,7 +19,9 @@ int test_left_shift_edge() {
 
     /*
      * Set a single bit in the source at position (x, 0). This bit will be
-     * shifted left to the edge (bit 79) in the result.
+     * shifted left to the edge (bit 79) in the result. Actually, it tests
+     * right-shifted phase alignment too, because the source bit position varies
+     * from 0 to 79.
      */
     assert(blit_rop2(&source, x, 0, 1, 80, &source, 0, 0, blit_rop2_1));
     assert(blit_rop2(&result, 79, 0, 1, 80, &source, x, 0, blit_rop2_copy));
