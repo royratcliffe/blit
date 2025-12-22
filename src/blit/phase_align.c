@@ -1,5 +1,5 @@
 /*
- * SPDX-FileCopyrightText: 1996, 1998, 1999, 2002, Roy Ratcliffe, Northumberland, United Kingdom
+ * SPDX-FileCopyrightText: 2025, Roy Ratcliffe, Northumberland, United Kingdom
  * SPDX-License-Identifier: MIT
  */
 
