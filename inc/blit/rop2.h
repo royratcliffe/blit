@@ -3,14 +3,14 @@
  * SPDX-License-Identifier: MIT
  */
 
- /*!
-  * \file blit/rop2.h
-  * \brief Binary raster operations.
-  * \details This header file declares the enumeration of binary raster operation
-  * codes used in graphics operations, as well as the function prototype for
-  * performing raster operations on scan structures. These operations combine
-  * source and destination pixel values using bitwise operations.
-  */
+/*!
+ * \file blit/rop2.h
+ * \brief Binary raster operations.
+ * \details This header file declares the enumeration of binary raster operation
+ * codes used in graphics operations, as well as the function prototype for
+ * performing raster operations on scan structures. These operations combine
+ * source and destination pixel values using bitwise operations.
+ */
 
 #ifndef __BLIT_ROP2_H__
 #define __BLIT_ROP2_H__
@@ -75,6 +75,42 @@ enum blit_rop2 {
  * \param rop2 The raster operation code.
  * \return true if the operation was successful, false otherwise.
  */
-bool blit_rop2(struct blit_scan *result, struct blit_rgn1 *x, struct blit_rgn1 *y, const struct blit_scan *source, enum blit_rop2 rop2);
+bool blit_rgn1_rop2(struct blit_scan *result, struct blit_rgn1 *x, struct blit_rgn1 *y, const struct blit_scan *source, enum blit_rop2 rop2);
+
+/*!
+ * \brief Convenience inline function for performing raster operations.
+ * \details This inline function provides a convenient way to perform raster
+ * operations on specified regions of the source and destination scan
+ * structures. It constructs one-dimensional region structures for both the x
+ * and y axes based on the provided parameters and then calls the
+ * \c blit_rgn1_rop2 function to perform the operation.
+ *
+ * Use this version when you don't need to inspect the modified region
+ * structures that carry the clipped origins and extents. They are created on
+ * the stack and passed to the underlying function.
+ * \param result Pointer to the destination scan structure.
+ * \param x The x-coordinate of the origin of the region in the destination.
+ * \param y The y-coordinate of the origin of the region in the destination.
+ * \param x_extent The extent of the region in the x-axis.
+ * \param y_extent The extent of the region in the y-axis.
+ * \param source Pointer to the source scan structure.
+ * \param x_source The x-coordinate of the origin of the region in the source.
+ * \param y_source The y-coordinate of the origin of the region in the source.
+ * \param rop2 The raster operation code to apply.
+ */
+static inline bool blit_rop2(struct blit_scan *result, int x, int y, int x_extent, int y_extent, const struct blit_scan *source, int x_source, int y_source,
+                             enum blit_rop2 rop2) {
+  struct blit_rgn1 x_rgn1 = {
+      .origin = x,
+      .extent = x_extent,
+      .origin_source = x_source,
+  };
+  struct blit_rgn1 y_rgn1 = {
+      .origin = y,
+      .extent = y_extent,
+      .origin_source = y_source,
+  };
+  return blit_rgn1_rop2(result, &x_rgn1, &y_rgn1, source, rop2);
+}
 
 #endif /* __BLIT_ROP2_H__ */

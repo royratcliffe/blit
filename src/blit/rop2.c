@@ -183,7 +183,7 @@ static void fetch_logic_mask_store(struct blit_phase_align *align, enum blit_rop
  */
 static void fetch_logic_store(struct blit_phase_align *align, enum blit_rop2 rop2, blit_scanline_t *store);
 
-bool blit_rop2(struct blit_scan *result, struct blit_rgn1 *x, struct blit_rgn1 *y, const struct blit_scan *source, enum blit_rop2 rop2) {
+bool blit_rgn1_rop2(struct blit_scan *result, struct blit_rgn1 *x, struct blit_rgn1 *y, const struct blit_scan *source, enum blit_rop2 rop2) {
   /*
    * Normalise, slip, and clip the x region. The regions are first normalised to
    * ensure that their extents are non-negative. Then, they are slipped to
