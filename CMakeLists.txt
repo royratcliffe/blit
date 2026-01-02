@@ -39,7 +39,11 @@ add_test(NAME left_shift_edge COMMAND test_runner test/left_shift_edge)
 # https://www.mcternan.me.uk/mscgen/
 find_package(Doxygen OPTIONAL_COMPONENTS dot mscgen dia)
 if(DOXYGEN_FOUND)
+    set(DOXYGEN_USE_MDFILE_AS_MAINPAGE README.md)
     set(DOXYGEN_OPTIMIZE_OUTPUT_FOR_C YES)
     set(DOXYGEN_SOURCE_BROWSER YES)
-    doxygen_add_docs(doxy ${PROJECT_SOURCE_DIR}/inc ${PROJECT_SOURCE_DIR}/src)
+    set(DOXYGEN_EXCLUDE ${CMAKE_BINARY_DIR})
+    doxygen_add_docs(doxy ${CMAKE_SOURCE_DIR}
+        COMMENT "Generating API documentation with Doxygen"
+    )
 endif()

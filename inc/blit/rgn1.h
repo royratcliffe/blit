@@ -11,7 +11,7 @@
  * clipping the region.
  */
 
- #ifndef __BLIT_RGN1_H__
+#ifndef __BLIT_RGN1_H__
 #define __BLIT_RGN1_H__
 
 #include <assert.h>
@@ -61,9 +61,23 @@ static inline void blit_rgn1_norm(struct blit_rgn1 *rgn1) {
   assert(rgn1->extent >= 0);
 }
 
+/*!
+ * \brief Slip a one-dimensional region into positive space.
+ * \details This function adjusts a one-dimensional region represented by the
+ * \c blit_rgn1 structure to ensure that both the origin and source origin are
+ * non-negative. If either the origin or source origin is negative, the region
+ * is "slipped" into positive space by adjusting the origins and reducing the
+ * extent accordingly. If the entire region is outside positive space, the
+ * function returns false.
+ * \param rgn1 Pointer to the \c blit_rgn1 structure to slip.
+ * \retval true if the region was successfully slipped into positive space.
+ * \retval false if the entire region is outside positive space.
+ */
 static inline bool blit_rgn1_slip(struct blit_rgn1 *rgn1) {
-  int offset =
-      rgn1->origin < 0 ? (rgn1->origin < rgn1->origin_source ? -rgn1->origin : -rgn1->origin_source) : (rgn1->origin_source < 0 ? -rgn1->origin_source : 0);
+  int offset = rgn1->origin < 0
+                   ? (rgn1->origin < rgn1->origin_source ? -rgn1->origin
+                                                         : -rgn1->origin_source)
+                   : (rgn1->origin_source < 0 ? -rgn1->origin_source : 0);
   assert(offset >= 0);
   if (offset >= rgn1->extent)
     return false;
