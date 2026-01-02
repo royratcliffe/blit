@@ -74,8 +74,10 @@ static inline void blit_rgn1_norm(struct blit_rgn1 *rgn1) {
  * \retval false if the entire region is outside positive space.
  */
 static inline bool blit_rgn1_slip(struct blit_rgn1 *rgn1) {
-  int offset =
-      rgn1->origin < 0 ? (rgn1->origin < rgn1->origin_source ? -rgn1->origin : -rgn1->origin_source) : (rgn1->origin_source < 0 ? -rgn1->origin_source : 0);
+  int offset = rgn1->origin < 0
+                   ? (rgn1->origin < rgn1->origin_source ? -rgn1->origin
+                                                         : -rgn1->origin_source)
+                   : (rgn1->origin_source < 0 ? -rgn1->origin_source : 0);
   assert(offset >= 0);
   if (offset >= rgn1->extent)
     return false;
