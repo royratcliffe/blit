@@ -64,7 +64,7 @@ unsigned integers (`blit_scanline_t` type). Key properties:
 
 **Example:**
 
-``` c
+```c
 BLIT_SCAN_DEFINE(image, 800, 600); // 800×600 bit image
 ```
 
@@ -94,7 +94,7 @@ All 16 binary operations combining source (S) and destination (D):
 
 Common operations have aliases:
 
-``` c
+```c
 blit_rop2_copy = blit_rop2_S
 blit_rop2_invert = blit_rop2_Sn
 blit_rop2_xor = blit_rop2_DSx
@@ -113,7 +113,7 @@ Handles efficient bit-level alignment between source and destination:
 
 ### Low-Level API: `blit_rgn1_rop2`
 
-``` c
+```c
 bool blit_rgn1_rop2(struct blit_scan *result,
                     struct blit_rgn1 *x,
                     struct blit_rgn1 *y,
@@ -136,7 +136,7 @@ bool blit_rgn1_rop2(struct blit_scan *result,
 
 ### Convenience API: `blit_rop2`
 
-``` c
+```c
 bool blit_rop2(struct blit_scan *result,
                int x, int y, int x_extent, int y_extent,
                const struct blit_scan *source,
@@ -162,7 +162,7 @@ region inspection
 
 ### Copy a 32×32 region
 
-``` c
+```c
 BLIT_SCAN_DEFINE(dest, 256, 256);
 BLIT_SCAN_DEFINE(source, 256, 256);
 
@@ -172,14 +172,14 @@ blit_rop2(&dest, 50, 50, 32, 32, &source, 100, 50, blit_rop2_copy);
 
 ### Invert a region
 
-``` c
+```c
 // Invert a 64×64 area at (0,0) in an image.
 blit_rop2(&image, 0, 0, 64, 64, &image, 0, 0, blit_rop2_invert);
 ```
 
 ### XOR pattern overlay
 
-``` c
+```c
 BLIT_SCAN_DEFINE(pattern, 8, 8);
 BLIT_SCAN_DEFINE(canvas, 640, 480);
 
@@ -193,7 +193,7 @@ for (int y = 0; y < 480; y += 8) {
 
 ### Using region structures (advanced)
 
-``` c
+```c
 struct blit_rgn1 x_rgn = {.origin = 10, .extent = 50, .origin_source = 20};
 struct blit_rgn1 y_rgn = {.origin = 10, .extent = 50, .origin_source = 20};
 
@@ -212,7 +212,7 @@ if (blit_rgn1_rop2(&dest, &x_rgn, &y_rgn, &source, blit_rop2_and)) {
 
 ### Build Commands
 
-``` bash
+```bash
 mkdir build
 cd build
 cmake ..
@@ -221,7 +221,7 @@ cmake --build .
 
 ### Running Tests
 
-``` bash
+```bash
 cd build
 ctest                    # Run all tests
 ctest --verbose          # With detailed output
@@ -236,7 +236,7 @@ Each of the 16 ROP2 codes maps to a static function implementing the
 bitwise operation. Take one example: the DSx (destination XOR source in
 reverse Polish) operation:
 
-``` c
+```c
 // Example: DSx (XOR) operation.
 static blit_scanline_t ropDSx(blit_scanline_t fetch, blit_scanline_t store) {
   return fetch ^ store;
@@ -294,7 +294,7 @@ combinations.
 
 Run all tests using the following:
 
-``` bash
+```bash
 cd build
 ctest --verbose
 ```
