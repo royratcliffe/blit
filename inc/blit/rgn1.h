@@ -11,7 +11,7 @@
  * clipping the region.
  */
 
- #ifndef __BLIT_RGN1_H__
+#ifndef __BLIT_RGN1_H__
 #define __BLIT_RGN1_H__
 
 #include <assert.h>
