@@ -1,0 +1,25 @@
+var searchData=
+[
+  ['bit_20block_20transfer_20algorithm_0',['Bit block transfer algorithm',['../index.html#autotoc_md23',1,'']]],
+  ['blit_1',['Blit',['../index.html',1,'']]],
+  ['blit_5fphase_5falign_2',['blit_phase_align',['../structblit__phase__align.html',1,'']]],
+  ['blit_5fphase_5falign_5ffetch_3',['blit_phase_align_fetch',['../phase__align_8h.html#a99ab79a1593ce786c3654899f0d7fb6f',1,'blit_phase_align_fetch(struct blit_phase_align *align):&#160;phase_align.c'],['../phase__align_8c.html#a99ab79a1593ce786c3654899f0d7fb6f',1,'blit_phase_align_fetch(struct blit_phase_align *align):&#160;phase_align.c']]],
+  ['blit_5fphase_5falign_5fprefetch_4',['blit_phase_align_prefetch',['../phase__align_8h.html#a21639b4565632ecaa94f6c2e1d81ce0e',1,'blit_phase_align_prefetch(struct blit_phase_align *align):&#160;phase_align.c'],['../phase__align_8c.html#a21639b4565632ecaa94f6c2e1d81ce0e',1,'blit_phase_align_prefetch(struct blit_phase_align *align):&#160;phase_align.c']]],
+  ['blit_5fphase_5falign_5fstart_5',['blit_phase_align_start',['../phase__align_8h.html#a54f14c3850a2723b8f98d4d48bb213b5',1,'blit_phase_align_start(struct blit_phase_align *align, int x, int x_store, const blit_scanline_t *store):&#160;phase_align.c'],['../phase__align_8c.html#a54f14c3850a2723b8f98d4d48bb213b5',1,'blit_phase_align_start(struct blit_phase_align *align, int x, int x_store, const blit_scanline_t *store):&#160;phase_align.c']]],
+  ['blit_5frgn1_6',['blit_rgn1',['../structblit__rgn1.html',1,'']]],
+  ['blit_5frgn1_20tt_7',['One-dimensional region (&lt;tt&gt;blit_rgn1&lt;/tt&gt;)',['../index.html#autotoc_md6',1,'']]],
+  ['blit_5frgn1_5frop2_8',['blit_rgn1_rop2',['../rop2_8c.html#a9c988263291bdb065e058604e16e5871',1,'blit_rgn1_rop2(struct blit_scan *result, struct blit_rgn1 *x, struct blit_rgn1 *y, const struct blit_scan *source, enum blit_rop2 rop2):&#160;rop2.c'],['../rop2_8h.html#a9c988263291bdb065e058604e16e5871',1,'blit_rgn1_rop2(struct blit_scan *result, struct blit_rgn1 *x, struct blit_rgn1 *y, const struct blit_scan *source, enum blit_rop2 rop2):&#160;rop2.c']]],
+  ['blit_5frgn1_5frop2_20tt_9',['Low-Level API: &lt;tt&gt;blit_rgn1_rop2&lt;/tt&gt;',['../index.html#autotoc_md10',1,'']]],
+  ['blit_5frop2_10',['blit_rop2',['../rop2_8h.html#aaf32f178fd2a9edab54b8e5d3cd57afa',1,'blit_rop2:&#160;rop2.h'],['../rop2_8h.html#a68aefee2233142e919d50e0f35549d74',1,'blit_rop2(struct blit_scan *result, const int x, const int y, const int x_extent, const int y_extent, const struct blit_scan *source, const int x_source, const int y_source, enum blit_rop2 rop2):&#160;rop2.c'],['../rop2_8c.html#a68aefee2233142e919d50e0f35549d74',1,'blit_rop2(struct blit_scan *result, const int x, const int y, const int x_extent, const int y_extent, const struct blit_scan *source, const int x_source, const int y_source, enum blit_rop2 rop2):&#160;rop2.c']]],
+  ['blit_5frop2_20tt_11',['blit_rop2 tt',['../index.html#autotoc_md11',1,'Convenience API: &lt;tt&gt;blit_rop2&lt;/tt&gt;'],['../index.html#autotoc_md7',1,'Raster operations (&lt;tt&gt;blit_rop2&lt;/tt&gt;)']]],
+  ['blit_5frop2_5ffunc_5ft_12',['blit_rop2_func_t',['../rop2_8c.html#a0784e53fe690b1042fdcdc2f499ff975',1,'rop2.c']]],
+  ['blit_5fscan_13',['blit_scan',['../structblit__scan.html',1,'']]],
+  ['blit_5fscan_20tt_14',['Scanline buffer (&lt;tt&gt;blit_scan&lt;/tt&gt;)',['../index.html#autotoc_md5',1,'']]],
+  ['blit_5fscan_5fdefine_15',['BLIT_SCAN_DEFINE',['../scan_8h.html#a2172c98e8785fb93d328dc1856d9e98a',1,'scan.h']]],
+  ['blit_5fscan_5fdefine_5fstatic_16',['BLIT_SCAN_DEFINE_STATIC',['../scan_8h.html#adacc2cf5842fa1d95aa0bea3e99cb221',1,'scan.h']]],
+  ['blit_5fscanline_5ft_17',['blit_scanline_t',['../scan_8h.html#ae29b9720b477eaab2f5848c6ff58e679',1,'scan.h']]],
+  ['block_20transfer_20algorithm_18',['Bit block transfer algorithm',['../index.html#autotoc_md23',1,'']]],
+  ['buffer_20tt_20blit_5fscan_20tt_19',['Scanline buffer (&lt;tt&gt;blit_scan&lt;/tt&gt;)',['../index.html#autotoc_md5',1,'']]],
+  ['build_20commands_20',['Build Commands',['../index.html#autotoc_md19',1,'']]],
+  ['building_21',['Building',['../index.html#autotoc_md17',1,'']]]
+];

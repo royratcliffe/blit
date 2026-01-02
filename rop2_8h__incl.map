@@ -1,0 +1,13 @@
+<map id="inc/blit/rop2.h" name="inc/blit/rop2.h">
+<area shape="rect" id="Node000001" title="Binary raster operations." alt="" coords="139,5,250,31"/>
+<area shape="rect" id="Node000002" href="$rgn1_8h.html" title="One&#45;dimensional region structure." alt="" coords="95,79,183,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="188,33,158,69,154,66,183,29"/>
+<area shape="rect" id="Node000005" href="$scan_8h.html" title="Scanline structure definition." alt="" coords="207,79,297,104"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="206,29,236,66,232,70,202,33"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="5,152,80,177"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="125,106,71,146,68,141,122,102"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="104,152,187,177"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="142,104,146,138,140,139,137,105"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="217,152,287,177"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="255,104,255,138,249,138,249,104"/>
+</map>

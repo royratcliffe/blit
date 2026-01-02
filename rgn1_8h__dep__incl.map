@@ -1,0 +1,11 @@
+<map id="inc/blit/rgn1.h" name="inc/blit/rgn1.h">
+<area shape="rect" id="Node000001" title="One&#45;dimensional region structure." alt="" coords="164,5,275,31"/>
+<area shape="rect" id="Node000002" href="$rop2_8h.html" title="Binary raster operations." alt="" coords="164,79,275,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="222,44,222,79,217,79,217,44"/>
+<area shape="rect" id="Node000003" href="$rop2_8c.html" title="Binary raster operations." alt="" coords="5,152,116,177"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="183,112,88,154,86,149,181,107"/>
+<area shape="rect" id="Node000004" href="$left__shift__edge_8c_source.html" title=" " alt="" coords="141,152,298,177"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="222,118,222,152,217,152,217,118"/>
+<area shape="rect" id="Node000005" href="$pat_8c_source.html" title=" " alt="" coords="322,152,405,177"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="256,108,341,149,339,154,253,112"/>
+</map>
