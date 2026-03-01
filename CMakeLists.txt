@@ -1,6 +1,12 @@
 cmake_minimum_required(VERSION 3.25)
 project(blit)
 
+# Enable generation of compile_commands.json for tools like cppcheck and
+# clang-tidy. This will allow these tools to understand the compilation
+# commands and flags used for the project, which is good for accurate
+# analysis and reporting.
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+
 add_library(blit
     # Source files for the blit library.
     ${CMAKE_CURRENT_SOURCE_DIR}/src/blit/rop2.c
