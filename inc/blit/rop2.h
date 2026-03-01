@@ -106,7 +106,12 @@ int blit_rgn1_rop2(struct blit_scan *result, struct blit_rgn1 *x, struct blit_rg
  * \param rop2 The raster operation code to apply.
  * \return The number of logic operations performed.
  */
-int blit_rop2(struct blit_scan *result, const int x, const int y, const int x_extent, const int y_extent, const struct blit_scan *source, const int x_source,
-               const int y_source, enum blit_rop2 rop2);
+int blit_rop2(struct blit_scan *result,
+              /* destination region */
+              const int x, const int y, const int x_extent, const int y_extent,
+              /* source region */
+              const struct blit_scan *source, const int x_source, const int y_source,
+              /* raster operation */
+              enum blit_rop2 rop2);
 
 #endif /* __BLIT_ROP2_H__ */
