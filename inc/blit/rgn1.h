@@ -40,7 +40,7 @@ struct blit_rgn1 {
 
 /*!
  * \brief Normalise a one-dimensional region.
- * \details This function normalizes a one-dimensional region represented by the
+ * \details This function normalises a one-dimensional region represented by the
  * \c blit_rgn1 structure. If the extent of the region is negative, it
  * adjusts the origin and origin_source accordingly to ensure that the
  * extent is non-negative.
