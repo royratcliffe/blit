@@ -37,5 +37,14 @@ add_test(NAME left_shift_edge COMMAND test_runner test/left_shift_edge)
 
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
 include(lcov)
+if(LCOV)
+    # Add the necessary compiler and linker flags to enable code coverage analysis.
+    # Use generator expressions so coverage is only enabled for Debug configuration,
+    # which works for both single- and multi-config generators.
+    foreach(target IN ITEMS blit test_runner)
+        target_compile_options(${target} PRIVATE $<$<CONFIG:Debug>:--coverage>)
+        target_link_options(${target} PRIVATE $<$<CONFIG:Debug>:--coverage>)
+    endforeach()
+endif()
 include(doxy)
 include(cppcheck)
