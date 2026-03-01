@@ -2,6 +2,8 @@
     "cmake.coverageInfoFiles": [
         "${workspaceFolder}/build/coverage_filtered.info"
     ],
+    // NOTE: The 'lcov' target is only defined when lcov is installed and the build type is Debug.
+    // In other configurations, "Run with coverage" may fail if this target is not available.
     "cmake.postRunCoverageTarget": "lcov",
     "testing.coverageToolbarEnabled": true,
     "testing.defaultGutterClickAction": "runWithCoverage"
