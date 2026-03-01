@@ -192,9 +192,7 @@ static void fetch_logic_mask_store(struct blit_phase_align *align,
 static void fetch_logic_store(struct blit_phase_align *align,
                               enum blit_rop2 rop2, blit_scanline_t *store);
 
-bool blit_rgn1_rop2(struct blit_scan *result, struct blit_rgn1 *x,
-                    struct blit_rgn1 *y, const struct blit_scan *source,
-                    enum blit_rop2 rop2) {
+int blit_rgn1_rop2(struct blit_scan *result, struct blit_rgn1 *x, struct blit_rgn1 *y, const struct blit_scan *source, enum blit_rop2 rop2) {
   /*
    * Normalise, move, and clip the x region. The regions are first normalised to
    * ensure that their extents are non-negative. Then, they are moved to
@@ -203,17 +201,15 @@ bool blit_rgn1_rop2(struct blit_scan *result, struct blit_rgn1 *x,
    * structures.
    */
   blit_rgn1_norm(x);
-  if (!blit_rgn1_move(x) || !blit_rgn1_clip(x, result->width - x->origin) ||
-      !blit_rgn1_clip(x, source->width - x->origin_source))
-    return false;
+  if (!blit_rgn1_move(x) || !blit_rgn1_clip(x, result->width - x->origin) || !blit_rgn1_clip(x, source->width - x->origin_source))
+    return 0;
 
   /*
    * Normalise, move, and clip the y region.
    */
   blit_rgn1_norm(y);
-  if (!blit_rgn1_move(y) || !blit_rgn1_clip(y, result->height - y->origin) ||
-      !blit_rgn1_clip(y, source->height - y->origin_source))
-    return false;
+  if (!blit_rgn1_move(y) || !blit_rgn1_clip(y, result->height - y->origin) || !blit_rgn1_clip(y, source->height - y->origin_source))
+    return 0;
 
   /*
    * Compute some important values up front to avoid doing it inside the bit
@@ -272,12 +268,13 @@ bool blit_rgn1_rop2(struct blit_scan *result, struct blit_rgn1 *x,
    * of the phase alignment structure ensures that the source data is correctly
    * aligned with the destination data during the transfer.
    */
-  int extent = y->extent;
+  int extent = y->extent, logic_count = 0;
   if (extra_scan_count == 0) {
     const blit_scanline_t scan_mask = scan_origin_mask & scan_extent_mask;
     while (extent--) {
       blit_phase_align_prefetch(&align);
       fetch_logic_mask_store(&align, rop2, scan_mask, store++);
+      logic_count++;
       store += offset;
       align.store += offset_source;
     }
@@ -285,21 +282,22 @@ bool blit_rgn1_rop2(struct blit_scan *result, struct blit_rgn1 *x,
     while (extent--) {
       blit_phase_align_prefetch(&align);
       fetch_logic_mask_store(&align, rop2, scan_origin_mask, store++);
+      logic_count++;
       int extra = extra_scan_count;
       while (--extra) {
         fetch_logic_store(&align, rop2, store++);
+        logic_count++;
       }
       fetch_logic_mask_store(&align, rop2, scan_extent_mask, store++);
+      logic_count++;
       store += offset;
       align.store += offset_source;
     }
   }
-  return true;
+  return logic_count;
 }
 
-bool blit_rop2(struct blit_scan *result, const int x, const int y,
-               const int x_extent, const int y_extent,
-               const struct blit_scan *source, const int x_source,
+int blit_rop2(struct blit_scan *result, const int x, const int y, const int x_extent, const int y_extent, const struct blit_scan *source, const int x_source,
                const int y_source, enum blit_rop2 rop2) {
   /*
    * Build the one-dimensional region structures for x and y axes from the
