@@ -35,7 +35,7 @@ target_link_libraries(test_runner PRIVATE blit)
 add_test(NAME pat COMMAND test_runner test/pat)
 add_test(NAME left_shift_edge COMMAND test_runner test/left_shift_edge)
 
-set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
+list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
 include(lcov)
 include(doxy)
 include(cppcheck)
