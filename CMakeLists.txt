@@ -22,6 +22,7 @@ create_test_sourcelist(test_sources
     test_driver.c
     test/pat.c
     test/left_shift_edge.c
+    test/extra_scan_count.c
 )
 
 # Add a test executable that links against the library.
@@ -34,6 +35,7 @@ target_link_libraries(test_runner PRIVATE blit)
 
 add_test(NAME pat COMMAND test_runner test/pat)
 add_test(NAME left_shift_edge COMMAND test_runner test/left_shift_edge)
+add_test(NAME extra_scan_count COMMAND test_runner test/extra_scan_count)
 
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
 include(lcov)
