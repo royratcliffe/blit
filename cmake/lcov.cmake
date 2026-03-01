@@ -12,11 +12,13 @@
 # return the cached value. This allows us to check if lcov is available and
 # conditionally add code coverage targets.
 find_program(LCOV lcov)
-if(LCOV AND CMAKE_BUILD_TYPE STREQUAL "Debug")
+if(LCOV)
     # Add the necessary compiler and linker flags to enable code coverage analysis.
+    # Use generator expressions so coverage is only enabled for Debug configuration,
+    # which works for both single- and multi-config generators.
     foreach(target IN ITEMS blit test_runner)
-        target_compile_options(${target} PRIVATE --coverage)
-        target_link_options(${target} PRIVATE --coverage)
+        target_compile_options(${target} PRIVATE $<$<CONFIG:Debug>:--coverage>)
+        target_link_options(${target} PRIVATE $<$<CONFIG:Debug>:--coverage>)
     endforeach()
 
     # Add custom targets for code coverage analysis using lcov and genhtml.
@@ -27,9 +29,9 @@ if(LCOV AND CMAKE_BUILD_TYPE STREQUAL "Debug")
         DEPENDS test_runner
     )
     add_custom_target(lcov
-        WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
         COMMAND ${LCOV} --capture --directory . --output-file coverage.info
         COMMAND ${LCOV} --remove coverage.info '/usr/*' '*/test*' --output-file coverage_filtered.info
+        DEPENDS ctest
     )
     set_property(TARGET lcov PROPERTY FOLDER "Analysis")
 
