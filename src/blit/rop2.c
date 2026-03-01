@@ -32,8 +32,7 @@
  * (`fetch`) and the destination operand (`store`). The function returns an
  * 8-bit result of the raster operation.
  */
-typedef blit_scanline_t (*blit_rop2_func_t)(blit_scanline_t fetch,
-                                            blit_scanline_t store);
+typedef blit_scanline_t (*blit_rop2_func_t)(blit_scanline_t fetch, blit_scanline_t store);
 
 /*!
  * \brief Macro to define a raster operation function.
@@ -66,13 +65,9 @@ typedef blit_scanline_t (*blit_rop2_func_t)(blit_scanline_t fetch,
  * \param revPolish The reverse polish notation name of the raster operation.
  * \param x The expression defining the raster operation using D and S.
  */
-#define ROP_REV_POLISH(revPolish, x)                                           \
-  static blit_scanline_t rop##revPolish(blit_scanline_t fetch,                 \
-                                        blit_scanline_t store);                \
-  blit_scanline_t rop##revPolish(blit_scanline_t fetch,                        \
-                                 blit_scanline_t store) {                      \
-    return x;                                                                  \
-  }
+#define ROP_REV_POLISH(revPolish, x)                                                   \
+  static blit_scanline_t rop##revPolish(blit_scanline_t fetch, blit_scanline_t store); \
+  blit_scanline_t rop##revPolish(blit_scanline_t fetch, blit_scanline_t store) { return x; }
 
 /*!
  * \brief Raster operation: 0.
@@ -167,10 +162,8 @@ ROP_REV_POLISH(1, 0xffU);
  * functions. Each function implements a specific raster operation defined
  * using bitwise operations on the source (S) and destination (D) operands.
  */
-static blit_rop2_func_t rop2_func[] = {&rop0,    &ropDSon, &ropDSna, &ropSn,
-                                       &ropSDna, &ropDn,   &ropDSx,  &ropDSan,
-                                       &ropDSa,  &ropDSxn, &ropD,    &ropDSno,
-                                       &ropS,    &ropSDno, &ropDSo,  &rop1};
+static blit_rop2_func_t rop2_func[] = {&rop0,   &ropDSon, &ropDSna, &ropSn,   &ropSDna, &ropDn,   &ropDSx, &ropDSan,
+                                       &ropDSa, &ropDSxn, &ropD,    &ropDSno, &ropS,    &ropSDno, &ropDSo, &rop1};
 
 /*!
  * \brief Perform raster operation with masking and store the result.
@@ -179,9 +172,7 @@ static blit_rop2_func_t rop2_func[] = {&rop0,    &ropDSon, &ropDSna, &ropSn,
  * \param mask The mask to apply to the operation.
  * \param store Pointer to the destination operand.
  */
-static void fetch_logic_mask_store(struct blit_phase_align *align,
-                                   enum blit_rop2 rop2, blit_scanline_t mask,
-                                   blit_scanline_t *store);
+static void fetch_logic_mask_store(struct blit_phase_align *align, enum blit_rop2 rop2, blit_scanline_t mask, blit_scanline_t *store);
 
 /*!
  * \brief Perform raster operation and store the result.
@@ -189,8 +180,7 @@ static void fetch_logic_mask_store(struct blit_phase_align *align,
  * \param rop2 The raster operation code.
  * \param store Pointer to the destination operand.
  */
-static void fetch_logic_store(struct blit_phase_align *align,
-                              enum blit_rop2 rop2, blit_scanline_t *store);
+static void fetch_logic_store(struct blit_phase_align *align, enum blit_rop2 rop2, blit_scanline_t *store);
 
 int blit_rgn1_rop2(struct blit_scan *result, struct blit_rgn1 *x, struct blit_rgn1 *y, const struct blit_scan *source, enum blit_rop2 rop2) {
   /*
@@ -248,9 +238,7 @@ int blit_rgn1_rop2(struct blit_scan *result, struct blit_rgn1 *x, struct blit_rg
    * get out of sync! Keep them in step!
    */
   struct blit_phase_align align;
-  blit_phase_align_start(
-      &align, x->origin, x->origin_source & 7,
-      blit_scan_find(source, x->origin_source, y->origin_source));
+  blit_phase_align_start(&align, x->origin, x->origin_source & 7, blit_scan_find(source, x->origin_source, y->origin_source));
 
   /*
    * Perform the bit block transfer using the specified raster operation. The
@@ -297,8 +285,13 @@ int blit_rgn1_rop2(struct blit_scan *result, struct blit_rgn1 *x, struct blit_rg
   return logic_count;
 }
 
-int blit_rop2(struct blit_scan *result, const int x, const int y, const int x_extent, const int y_extent, const struct blit_scan *source, const int x_source,
-               const int y_source, enum blit_rop2 rop2) {
+int blit_rop2(struct blit_scan *result,
+              /* destination region */
+              const int x, const int y, const int x_extent, const int y_extent,
+              /* source region */
+              const struct blit_scan *source, const int x_source, const int y_source,
+              /* raster operation */
+              enum blit_rop2 rop2) {
   /*
    * Build the one-dimensional region structures for x and y axes from the
    * arguments. These structures define the origin and extent of the region to
@@ -318,13 +311,10 @@ int blit_rop2(struct blit_scan *result, const int x, const int y, const int x_ex
   return blit_rgn1_rop2(result, &x_rgn1, &y_rgn1, source, rop2);
 }
 
-void fetch_logic_mask_store(struct blit_phase_align *align, enum blit_rop2 rop2,
-                            blit_scanline_t mask, blit_scanline_t *store) {
-  *store = (*store & ~mask) |
-           (mask & rop2_func[rop2](blit_phase_align_fetch(align), *store));
+void fetch_logic_mask_store(struct blit_phase_align *align, enum blit_rop2 rop2, blit_scanline_t mask, blit_scanline_t *store) {
+  *store = (*store & ~mask) | (mask & rop2_func[rop2](blit_phase_align_fetch(align), *store));
 }
 
-void fetch_logic_store(struct blit_phase_align *align, enum blit_rop2 rop2,
-                       blit_scanline_t *store) {
+void fetch_logic_store(struct blit_phase_align *align, enum blit_rop2 rop2, blit_scanline_t *store) {
   *store = rop2_func[rop2](blit_phase_align_fetch(align), *store);
 }
