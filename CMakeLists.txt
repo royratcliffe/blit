@@ -35,15 +35,7 @@ target_link_libraries(test_runner PRIVATE blit)
 add_test(NAME pat COMMAND test_runner test/pat)
 add_test(NAME left_shift_edge COMMAND test_runner test/left_shift_edge)
 
-# https://cmake.org/cmake/help/latest/module/FindDoxygen.html
-# https://www.mcternan.me.uk/mscgen/
-find_package(Doxygen OPTIONAL_COMPONENTS dot mscgen dia)
-if(DOXYGEN_FOUND)
-    set(DOXYGEN_USE_MDFILE_AS_MAINPAGE README.md)
-    set(DOXYGEN_OPTIMIZE_OUTPUT_FOR_C YES)
-    set(DOXYGEN_SOURCE_BROWSER YES)
-    set(DOXYGEN_EXCLUDE ${CMAKE_BINARY_DIR})
-    doxygen_add_docs(doxy ${CMAKE_SOURCE_DIR}
-        COMMENT "Generating API documentation with Doxygen"
-    )
-endif()
+set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
+include(lcov)
+include(doxy)
+include(cppcheck)
