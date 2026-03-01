@@ -196,22 +196,22 @@ bool blit_rgn1_rop2(struct blit_scan *result, struct blit_rgn1 *x,
                     struct blit_rgn1 *y, const struct blit_scan *source,
                     enum blit_rop2 rop2) {
   /*
-   * Normalise, slip, and clip the x region. The regions are first normalised to
-   * ensure that their extents are non-negative. Then, they are slipped to
+   * Normalise, move, and clip the x region. The regions are first normalised to
+   * ensure that their extents are non-negative. Then, they are moved to
    * ensure that their origins are non-negative. Finally, they are clipped to
    * ensure that they fit within the bounds of the destination and source scan
    * structures.
    */
   blit_rgn1_norm(x);
-  if (!blit_rgn1_slip(x) || !blit_rgn1_clip(x, result->width - x->origin) ||
+  if (!blit_rgn1_move(x) || !blit_rgn1_clip(x, result->width - x->origin) ||
       !blit_rgn1_clip(x, source->width - x->origin_source))
     return false;
 
   /*
-   * Normalise, slip, and clip the y region.
+   * Normalise, move, and clip the y region.
    */
   blit_rgn1_norm(y);
-  if (!blit_rgn1_slip(y) || !blit_rgn1_clip(y, result->height - y->origin) ||
+  if (!blit_rgn1_move(y) || !blit_rgn1_clip(y, result->height - y->origin) ||
       !blit_rgn1_clip(y, source->height - y->origin_source))
     return false;
 
