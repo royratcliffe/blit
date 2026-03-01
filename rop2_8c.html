@@ -202,12 +202,12 @@ Functions</h2></td></tr>
 &#160;</td><td class="memItemRight" valign="bottom"><b>ROP_REV_POLISH</b> (1, 0xffU)</td></tr>
 <tr class="memdesc:a19e448ed23c804749be1231c80acd223"><td class="mdescLeft">&#160;</td><td class="mdescRight">Raster operation: 1. <br /></td></tr>
 <tr class="separator:a19e448ed23c804749be1231c80acd223"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9c988263291bdb065e058604e16e5871" id="r_a9c988263291bdb065e058604e16e5871"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="rop2_8c.html#a9c988263291bdb065e058604e16e5871">blit_rgn1_rop2</a> (struct <a class="el" href="structblit__scan.html">blit_scan</a> *result, struct <a class="el" href="structblit__rgn1.html">blit_rgn1</a> *x, struct <a class="el" href="structblit__rgn1.html">blit_rgn1</a> *y, const struct <a class="el" href="structblit__scan.html">blit_scan</a> *source, enum <a class="el" href="rop2_8h.html#aaf32f178fd2a9edab54b8e5d3cd57afa">blit_rop2</a> rop2)</td></tr>
-<tr class="memdesc:a9c988263291bdb065e058604e16e5871"><td class="mdescLeft">&#160;</td><td class="mdescRight">Perform raster operation with masking and store the result.  <br /></td></tr>
-<tr class="separator:a9c988263291bdb065e058604e16e5871"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a68aefee2233142e919d50e0f35549d74" id="r_a68aefee2233142e919d50e0f35549d74"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="rop2_8c.html#a68aefee2233142e919d50e0f35549d74">blit_rop2</a> (struct <a class="el" href="structblit__scan.html">blit_scan</a> *result, const int x, const int y, const int x_extent, const int y_extent, const struct <a class="el" href="structblit__scan.html">blit_scan</a> *source, const int x_source, const int y_source, enum <a class="el" href="rop2_8h.html#aaf32f178fd2a9edab54b8e5d3cd57afa">blit_rop2</a> rop2)</td></tr>
-<tr class="memdesc:a68aefee2233142e919d50e0f35549d74"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convenience inline function for performing raster operations.  <br /></td></tr>
-<tr class="separator:a68aefee2233142e919d50e0f35549d74"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aec85d878ddec348ea7decdf7523ff20b" id="r_aec85d878ddec348ea7decdf7523ff20b"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="rop2_8c.html#aec85d878ddec348ea7decdf7523ff20b">blit_rgn1_rop2</a> (struct <a class="el" href="structblit__scan.html">blit_scan</a> *result, struct <a class="el" href="structblit__rgn1.html">blit_rgn1</a> *x, struct <a class="el" href="structblit__rgn1.html">blit_rgn1</a> *y, const struct <a class="el" href="structblit__scan.html">blit_scan</a> *source, enum <a class="el" href="rop2_8h.html#aaf32f178fd2a9edab54b8e5d3cd57afa">blit_rop2</a> rop2)</td></tr>
+<tr class="memdesc:aec85d878ddec348ea7decdf7523ff20b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Perform raster operation with masking and store the result.  <br /></td></tr>
+<tr class="separator:aec85d878ddec348ea7decdf7523ff20b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0909c3fc0c07b9ef333d34c28a1d182e" id="r_a0909c3fc0c07b9ef333d34c28a1d182e"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="rop2_8c.html#a0909c3fc0c07b9ef333d34c28a1d182e">blit_rop2</a> (struct <a class="el" href="structblit__scan.html">blit_scan</a> *result, const int x, const int y, const int x_extent, const int y_extent, const struct <a class="el" href="structblit__scan.html">blit_scan</a> *source, const int x_source, const int y_source, enum <a class="el" href="rop2_8h.html#aaf32f178fd2a9edab54b8e5d3cd57afa">blit_rop2</a> rop2)</td></tr>
+<tr class="memdesc:a0909c3fc0c07b9ef333d34c28a1d182e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convenience inline function for performing raster operations.  <br /></td></tr>
+<tr class="separator:a0909c3fc0c07b9ef333d34c28a1d182e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Binary raster operations. </p>
@@ -258,12 +258,8 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<b>Value:</b><div class="fragment"><div class="line">  <span class="keyword">static</span> <a class="code hl_typedef" href="scan_8h.html#ae29b9720b477eaab2f5848c6ff58e679">blit_scanline_t</a> rop##revPolish(<a class="code hl_typedef" href="scan_8h.html#ae29b9720b477eaab2f5848c6ff58e679">blit_scanline_t</a> fetch,                 \</div>
-<div class="line">                                        <a class="code hl_typedef" href="scan_8h.html#ae29b9720b477eaab2f5848c6ff58e679">blit_scanline_t</a> store);                \</div>
-<div class="line">  <a class="code hl_typedef" href="scan_8h.html#ae29b9720b477eaab2f5848c6ff58e679">blit_scanline_t</a> rop##revPolish(<a class="code hl_typedef" href="scan_8h.html#ae29b9720b477eaab2f5848c6ff58e679">blit_scanline_t</a> fetch,                        \</div>
-<div class="line">                                 <a class="code hl_typedef" href="scan_8h.html#ae29b9720b477eaab2f5848c6ff58e679">blit_scanline_t</a> store) {                      \</div>
-<div class="line">    <span class="keywordflow">return</span> x;                                                                  \</div>
-<div class="line">  }</div>
+<b>Value:</b><div class="fragment"><div class="line">  <span class="keyword">static</span> <a class="code hl_typedef" href="scan_8h.html#ae29b9720b477eaab2f5848c6ff58e679">blit_scanline_t</a> rop##revPolish(<a class="code hl_typedef" href="scan_8h.html#ae29b9720b477eaab2f5848c6ff58e679">blit_scanline_t</a> fetch, <a class="code hl_typedef" href="scan_8h.html#ae29b9720b477eaab2f5848c6ff58e679">blit_scanline_t</a> store); \</div>
+<div class="line">  <a class="code hl_typedef" href="scan_8h.html#ae29b9720b477eaab2f5848c6ff58e679">blit_scanline_t</a> rop##revPolish(<a class="code hl_typedef" href="scan_8h.html#ae29b9720b477eaab2f5848c6ff58e679">blit_scanline_t</a> fetch, <a class="code hl_typedef" href="scan_8h.html#ae29b9720b477eaab2f5848c6ff58e679">blit_scanline_t</a> store) { <span class="keywordflow">return</span> x; }</div>
 <div class="ttc" id="ascan_8h_html_ae29b9720b477eaab2f5848c6ff58e679"><div class="ttname"><a href="scan_8h.html#ae29b9720b477eaab2f5848c6ff58e679">blit_scanline_t</a></div><div class="ttdeci">uint8_t blit_scanline_t</div><div class="ttdoc">Type definition for a scanline element.</div><div class="ttdef"><b>Definition</b> <a href="scan_8h_source.html#l00024">scan.h:24</a></div></div>
 </div><!-- fragment -->
 <p>Macro to define a raster operation function. </p>
@@ -295,7 +291,7 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="rop2_8c_source.html#l00069">69</a> of file <a class="el" href="rop2_8c_source.html">rop2.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="rop2_8c_source.html#l00068">68</a> of file <a class="el" href="rop2_8c_source.html">rop2.c</a>.</p>
 
 </div>
 </div>
@@ -338,14 +334,14 @@ Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Function Documentation</h2>
-<a id="a9c988263291bdb065e058604e16e5871" name="a9c988263291bdb065e058604e16e5871"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9c988263291bdb065e058604e16e5871">&#9670;&#160;</a></span>blit_rgn1_rop2()</h2>
+<a id="aec85d878ddec348ea7decdf7523ff20b" name="aec85d878ddec348ea7decdf7523ff20b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aec85d878ddec348ea7decdf7523ff20b">&#9670;&#160;</a></span>blit_rgn1_rop2()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">bool blit_rgn1_rop2 </td>
+          <td class="memname">int blit_rgn1_rop2 </td>
           <td>(</td>
           <td class="paramtype">struct <a class="el" href="structblit__scan.html">blit_scan</a> *&#160;</td>
           <td class="paramname"><em>result</em>, </td>
@@ -393,20 +389,20 @@ Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>true if the operation was successful, false otherwise. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>The number of logic operations performed. This includes all operations performed on the destination scan space, including those that may not have resulted in a change to the pixel values (e.g., operations that resulted in the same value being written back to the destination). It includes partial operations on the first and last bytes of each scanline, which may have been masked to only affect certain bits. The count reflects the total number of operations attempted based on the region and raster operation specified, regardless of the actual changes made to the pixel data. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="rop2_8c_source.html#l00195">195</a> of file <a class="el" href="rop2_8c_source.html">rop2.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="rop2_8c_source.html#l00185">185</a> of file <a class="el" href="rop2_8c_source.html">rop2.c</a>.</p>
 
 </div>
 </div>
-<a id="a68aefee2233142e919d50e0f35549d74" name="a68aefee2233142e919d50e0f35549d74"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a68aefee2233142e919d50e0f35549d74">&#9670;&#160;</a></span>blit_rop2()</h2>
+<a id="a0909c3fc0c07b9ef333d34c28a1d182e" name="a0909c3fc0c07b9ef333d34c28a1d182e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0909c3fc0c07b9ef333d34c28a1d182e">&#9670;&#160;</a></span>blit_rop2()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">bool <a class="el" href="rop2_8h.html#aaf32f178fd2a9edab54b8e5d3cd57afa">blit_rop2</a> </td>
+          <td class="memname">int <a class="el" href="rop2_8h.html#aaf32f178fd2a9edab54b8e5d3cd57afa">blit_rop2</a> </td>
           <td>(</td>
           <td class="paramtype">struct <a class="el" href="structblit__scan.html">blit_scan</a> *&#160;</td>
           <td class="paramname"><em>result</em>, </td>
@@ -483,8 +479,9 @@ Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
+<dl class="section return"><dt>Returns</dt><dd>The number of logic operations performed. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="rop2_8c_source.html#l00300">300</a> of file <a class="el" href="rop2_8c_source.html">rop2.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="rop2_8c_source.html#l00288">288</a> of file <a class="el" href="rop2_8c_source.html">rop2.c</a>.</p>
 
 </div>
 </div>
