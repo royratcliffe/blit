@@ -1,6 +1,12 @@
 cmake_minimum_required(VERSION 3.25)
 project(blit)
 
+# Enable generation of compile_commands.json for tools like cppcheck and
+# clang-tidy. This will allow these tools to understand the compilation
+# commands and flags used for the project, which is good for accurate
+# analysis and reporting.
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+
 add_library(blit
     # Source files for the blit library.
     ${CMAKE_CURRENT_SOURCE_DIR}/src/blit/rop2.c
@@ -22,6 +28,7 @@ create_test_sourcelist(test_sources
     test_driver.c
     test/pat.c
     test/left_shift_edge.c
+    test/extra_scan_count.c
 )
 
 # Add a test executable that links against the library.
@@ -34,16 +41,18 @@ target_link_libraries(test_runner PRIVATE blit)
 
 add_test(NAME pat COMMAND test_runner test/pat)
 add_test(NAME left_shift_edge COMMAND test_runner test/left_shift_edge)
+add_test(NAME extra_scan_count COMMAND test_runner test/extra_scan_count)
 
-# https://cmake.org/cmake/help/latest/module/FindDoxygen.html
-# https://www.mcternan.me.uk/mscgen/
-find_package(Doxygen OPTIONAL_COMPONENTS dot mscgen dia)
-if(DOXYGEN_FOUND)
-    set(DOXYGEN_USE_MDFILE_AS_MAINPAGE README.md)
-    set(DOXYGEN_OPTIMIZE_OUTPUT_FOR_C YES)
-    set(DOXYGEN_SOURCE_BROWSER YES)
-    set(DOXYGEN_EXCLUDE ${CMAKE_BINARY_DIR})
-    doxygen_add_docs(doxy ${CMAKE_SOURCE_DIR}
-        COMMENT "Generating API documentation with Doxygen"
-    )
+list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
+include(lcov)
+if(LCOV)
+    # Add the necessary compiler and linker flags to enable code coverage analysis.
+    # Use generator expressions so coverage is only enabled for Debug configuration,
+    # which works for both single- and multi-config generators.
+    foreach(target IN ITEMS blit test_runner)
+        target_compile_options(${target} PRIVATE $<$<CONFIG:Debug>:--coverage>)
+        target_link_options(${target} PRIVATE $<$<CONFIG:Debug>:--coverage>)
+    endforeach()
 endif()
+include(doxy)
+include(cppcheck)

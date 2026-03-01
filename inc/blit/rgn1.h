@@ -7,7 +7,7 @@
  * \brief One-dimensional region structure.
  * \details This header file defines the \c blit_rgn1 structure, which
  * represents a one-dimensional region with an origin, extent, and source
- * origin. It also provides inline functions for normalising, slipping, and
+ * origin. It also provides inline functions for normalising, moving, and
  * clipping the region.
  */
 
@@ -40,7 +40,7 @@ struct blit_rgn1 {
 
 /*!
  * \brief Normalise a one-dimensional region.
- * \details This function normalizes a one-dimensional region represented by the
+ * \details This function normalises a one-dimensional region represented by the
  * \c blit_rgn1 structure. If the extent of the region is negative, it
  * adjusts the origin and origin_source accordingly to ensure that the
  * extent is non-negative.
@@ -62,18 +62,18 @@ static inline void blit_rgn1_norm(struct blit_rgn1 *rgn1) {
 }
 
 /*!
- * \brief Slip a one-dimensional region into positive space.
+ * \brief Move a one-dimensional region into positive space.
  * \details This function adjusts a one-dimensional region represented by the
  * \c blit_rgn1 structure to ensure that both the origin and source origin are
  * non-negative. If either the origin or source origin is negative, the region
- * is "slipped" into positive space by adjusting the origins and reducing the
+ * is "moved" into positive space by adjusting the origins and reducing the
  * extent accordingly. If the entire region is outside positive space, the
  * function returns false.
- * \param rgn1 Pointer to the \c blit_rgn1 structure to slip.
- * \retval true if the region was successfully slipped into positive space.
+ * \param rgn1 Pointer to the \c blit_rgn1 structure to move.
+ * \retval true if the region was successfully moved into positive space.
  * \retval false if the entire region is outside positive space.
  */
-static inline bool blit_rgn1_slip(struct blit_rgn1 *rgn1) {
+static inline bool blit_rgn1_move(struct blit_rgn1 *rgn1) {
   int offset = rgn1->origin < 0
                    ? (rgn1->origin < rgn1->origin_source ? -rgn1->origin
                                                          : -rgn1->origin_source)

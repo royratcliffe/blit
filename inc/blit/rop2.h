@@ -72,11 +72,17 @@ enum blit_rop2 {
  * \param y Pointer to the one-dimensional region structure for the y-axis.
  * \param source Pointer to the source scan structure.
  * \param rop2 The raster operation code.
- * \return true if the operation was successful, false otherwise.
+ * \return The number of logic operations performed. This includes all
+ * operations performed on the destination scan space, including those
+ * that may not have resulted in a change to the pixel values (e.g.,
+ * operations that resulted in the same value being written back to the
+ * destination). It includes partial operations on the first and last
+ * bytes of each scanline, which may have been masked to only affect
+ * certain bits. The count reflects the total number of operations
+ * attempted based on the region and raster operation specified,
+ * regardless of the actual changes made to the pixel data.
  */
-bool blit_rgn1_rop2(struct blit_scan *result, struct blit_rgn1 *x,
-                    struct blit_rgn1 *y, const struct blit_scan *source,
-                    enum blit_rop2 rop2);
+int blit_rgn1_rop2(struct blit_scan *result, struct blit_rgn1 *x, struct blit_rgn1 *y, const struct blit_scan *source, enum blit_rop2 rop2);
 
 /*!
  * \brief Convenience inline function for performing raster operations.
@@ -98,10 +104,14 @@ bool blit_rgn1_rop2(struct blit_scan *result, struct blit_rgn1 *x,
  * \param x_source The x-coordinate of the origin of the region in the source.
  * \param y_source The y-coordinate of the origin of the region in the source.
  * \param rop2 The raster operation code to apply.
+ * \return The number of logic operations performed.
  */
-bool blit_rop2(struct blit_scan *result, const int x, const int y,
-               const int x_extent, const int y_extent,
-               const struct blit_scan *source, const int x_source,
-               const int y_source, enum blit_rop2 rop2);
+int blit_rop2(struct blit_scan *result,
+              /* destination region */
+              const int x, const int y, const int x_extent, const int y_extent,
+              /* source region */
+              const struct blit_scan *source, const int x_source, const int y_source,
+              /* raster operation */
+              enum blit_rop2 rop2);
 
 #endif /* __BLIT_ROP2_H__ */
