@@ -114,4 +114,14 @@ int blit_rop2(struct blit_scan *result,
               /* raster operation */
               enum blit_rop2 rop2);
 
+static inline int blit_x_rop2(blit_scanline_t *store, int x, int x_extent, const blit_scanline_t *fetch, int x_source, enum blit_rop2 rop2) {
+  struct blit_scan result = {store, x + x_extent, 1, (x + x_extent + 7) >> 3};
+  struct blit_scan source = {(blit_scanline_t *)fetch, x_source + x_extent, 1, (x_source + x_extent + 7) >> 3};
+  return blit_rop2(&result, x, 0, x_extent, 1, &source, x_source, 0, rop2);
+}
+
+static inline int blit_x_copy(blit_scanline_t *store, int x, int x_extent, const blit_scanline_t *fetch, int x_source) {
+  return blit_x_rop2(store, x, x_extent, fetch, x_source, blit_rop2_copy);
+}
+
 #endif /* __BLIT_ROP2_H__ */
