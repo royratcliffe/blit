@@ -114,12 +114,40 @@ int blit_rop2(struct blit_scan *result,
               /* raster operation */
               enum blit_rop2 rop2);
 
+/*!
+ * \brief Perform raster operation on a single scanline.
+ * \details This inline function provides a convenient way to perform raster
+ * operations on a single scanline. It constructs one-dimensional region
+ * structures for both the x and y axes based on the provided parameters and
+ * then calls the \c blit_rgn1_rop2 function to perform the operation.
+ * \param store Pointer to the destination scanline.
+ * \param x The x-coordinate of the origin of the region in the destination.
+ * \param x_extent The extent of the region in the x-axis.
+ * \param fetch Pointer to the source scanline.
+ * \param x_source The x-coordinate of the origin of the region in the source.
+ * \param rop2 The raster operation code to apply.
+ * \return The number of logic operations performed.
+ */
 static inline int blit_x_rop2(blit_scanline_t *store, int x, int x_extent, const blit_scanline_t *fetch, int x_source, enum blit_rop2 rop2) {
   struct blit_scan result = {store, x + x_extent, 1, (x + x_extent + 7) >> 3};
   struct blit_scan source = {(blit_scanline_t *)fetch, x_source + x_extent, 1, (x_source + x_extent + 7) >> 3};
   return blit_rop2(&result, x, 0, x_extent, 1, &source, x_source, 0, rop2);
 }
 
+/*!
+ * \brief Convenience inline function for performing copy raster operation on a
+ * single scanline.
+ * \details This inline function provides a convenient way to perform a \e copy
+ * raster operation on a single scanline. It constructs one-dimensional region
+ * structures for both the x and y axes based on the provided parameters and
+ * then calls the \c blit_x_rop2 function with the copy raster operation code.
+ * \param store Pointer to the destination scanline.
+ * \param x The x-coordinate of the origin of the region in the destination.
+ * \param x_extent The extent of the region in the x-axis.
+ * \param fetch Pointer to the source scanline.
+ * \param x_source The x-coordinate of the origin of the region in the source.
+ * \return The number of logic operations performed.
+ */
 static inline int blit_x_copy(blit_scanline_t *store, int x, int x_extent, const blit_scanline_t *fetch, int x_source) {
   return blit_x_rop2(store, x, x_extent, fetch, x_source, blit_rop2_copy);
 }
