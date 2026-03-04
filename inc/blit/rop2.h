@@ -129,8 +129,21 @@ int blit_rop2(struct blit_scan *result,
  * \return The number of logic operations performed.
  */
 static inline int blit_x_rop2(blit_scanline_t *store, int x, int x_extent, const blit_scanline_t *fetch, int x_source, enum blit_rop2 rop2) {
-  struct blit_scan result = {store, x + x_extent, 1, (x + x_extent + 7) >> 3};
-  struct blit_scan source = {(blit_scanline_t *)fetch, x_source + x_extent, 1, (x_source + x_extent + 7) >> 3};
+  /*
+   * Make the strides zero to indicate that the source and destination are
+   * single scanlines. The width is set to the extent of the region to be
+   * processed, and the height is set to 1 since it's a single scanline. The x
+   * and y coordinates are set to the origin of the region in the destination
+   * and source, respectively.
+   *
+   * Perform a const cast on the source scanline pointer to match the expected
+   * type in the blit_scan structure. This is safe because the blit_rgn1_rop2
+   * function will not modify the source data, and the const qualifier is only
+   * for the caller's reference to indicate that the source data should not be
+   * modified.
+   */
+  struct blit_scan result = {store, x + x_extent, 1, 0};
+  struct blit_scan source = {(blit_scanline_t *)fetch, x_source + x_extent, 1, 0};
   return blit_rop2(&result, x, 0, x_extent, 1, &source, x_source, 0, rop2);
 }
 
